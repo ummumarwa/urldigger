@@ -38,9 +38,36 @@ def alexa(country, n):
 		alexaES("ES")
 	elif country == "EN":
 		if n >= 1:
-			alexaEN(n)
-		alexaEN(2)
+			# max 24 number = 2400 results. To-check
+			num = calculateN(n)
+			alexaEN(num)
+		else: alexaEN(2)
 
+
+def calculateN(n):
+	if n == 20:
+		return(2)
+	elif n == 40:
+		return(3)
+	elif n == 60:
+		return(4)
+	elif n == 80:
+		return(5)
+	elif n == 100:
+		return(6)
+	elif n == 120:
+		return(7)
+	elif n == 140:
+		return(8)
+	elif n == 160:
+		return(9)
+	elif n == 180:
+		return(10)
+	elif n == 200:
+		return(11)
+	
+	# Default return 2 -> 20 results
+	else: return(2)
 
 def alexaES(country):
 	alexa = "http://www.alexa.com/topsites/countries/ES"
@@ -71,20 +98,20 @@ def main():
     # Commands
     commands = optparse.OptionGroup(parser, "Commands")
     commands.add_option("-H", "--hot", action="store_true",
-			help="get hot urls from alexa")
+			help="get hot urls from alexa. [default 20]")
+    commands.add_option("-u", "--ulimit", action="store_true",
+                      help="no limit in the number of search url gets from google with '-g option'")
     parser.add_option_group(commands)
 
 
     # Options
     options = optparse.OptionGroup(parser, "Options")
     options.add_option("-a", "--alexa", dest="country", 
-			help="get urls from alexa top sites with selected country [EN, ES]")
+			help="get urls from alexa top sites with selected country (EN, ES). [default 20]")
     options.add_option("-g", "--goog", dest="term",
-                      help="get urls with search term=term from google [default 100]")
+                      help="get urls with search term=term from google [default 50]")
     options.add_option("-n", "--num", dest="number", type="int",
-                      help="specify number urls to get [default 20]")
-    options.add_option("-u", "--ul", dest="ulimit",
-                      action="store", help="no limit in the number of search url gets from google. Default is 100")
+                      help="specify number urls to get with 'option -a' (20,40,60,80,100,120). [default 20]")
     parser.add_option_group(options)
     
 
@@ -123,8 +150,9 @@ def main():
 #	print "Number specified"
 
     if options.term:
-	termtosearch = options.term
-	googledefault(termtosearch)
+	if options.ulimit:
+		google(options.term)
+	else: googledefault(options.term)
 
 if __name__ == "__main__":
     main()
