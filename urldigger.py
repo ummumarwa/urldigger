@@ -4,7 +4,7 @@ import os
 import urllib2
 import re
 import optparse
-# (check this library on run time)
+#External dependency. Get it from http://www.catonmat.net/download/xgoogle.zip
 from xgoogle.search import GoogleSearch, SearchError
 
 ################FUNCTIONS####################################
@@ -92,6 +92,7 @@ def alexa_custom(country, num):
 					print '%s'  % (m[0])
 			else:
 				for i in range(num):
+					#TODO: Customize code country
 					u = "http://www.alexa.com/topsites/countries;%d/ES" %i
 					for x, m in enumerate(re.findall(r, urllib2.urlopen(u).read())):
 						print '%s' %(m[0])
@@ -193,9 +194,6 @@ def main():
 
     if options.hot:
 	alexaHOT()
-
-    #if options.number:
-#	print "Number specified"
 
     if options.term:
 	if options.ulimit:
