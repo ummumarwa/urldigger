@@ -1,8 +1,11 @@
 #!/usr/bin/python
 
 import os
-#from optparse import OptionParser
+import urllib
+import urllib2
+import re
 import optparse
+#from optparse import OptionParser
 
 # (check this library on run time)
 from xgoogle.search import GoogleSearch, SearchError
@@ -32,6 +35,7 @@ def google(termtosearch):
 	    print res.url.encode('utf8')
 	except SearchError, e:
 	  print "Search failed: %s" % e	
+
 
 def alexa(country, n):
 	if country == "ES":
@@ -69,11 +73,14 @@ def calculateN(n):
 	# Default return 2 -> 20 results
 	else: return(2)
 
+
 def alexaES(country):
-	alexa = "http://www.alexa.com/topsites/countries/ES"
-	# check if hrefs.sh script exists
-	comando = "./hrefs.sh " + alexa
-	os.system(comando + '|grep -v alexa')
+	url = "http://www.alexa.com/topsites/countries/ES"
+	r = '<a  href="/siteinfo/(.*?)"  ><strong>(.*?)</strong>';	
+
+	for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
+		print '%s'  % (m[0])
+
 
 def alexaEN(num):
 	url ="\"http://www.alexa.com/topsites/global;\""
@@ -85,10 +92,27 @@ def alexaEN(num):
 		os.system(comando + '|grep -v alexa') 
 		n+=1
 
+
 def alexaHOT():
 	alexa = "http://www.alexa.com/hoturls"
 	comando = "./hrefs.sh " + alexa
 	os.system(comando + '|grep -v alexa')
+
+
+#http://code.prashanthellina.com/code/get_alexa_rank.py
+def get_alexa_rank(url):
+	print 'Getting alexa rank for %s' % url
+	data = urllib2.urlopen('http://data.alexa.com/data?cli=10&dat=snbamz&url=%s' % (url)).read()
+
+	popularity = re.findall("POPULARITY.*TEXT=\"(\d+)\"\/>",data)
+	if popularity:
+		popularity = popularity[0]
+	print "%s esta en el ranking de alexa el: %s" % (url,popularity)
+
+
+def show_alexa_data(url):
+	print 'Getting alexa data for %s' % url	
+	
 
 	
 def main():
@@ -112,6 +136,8 @@ def main():
                       help="get urls with search term=term from google [default 50]")
     options.add_option("-n", "--num", dest="number", type="int",
                       help="specify number urls to get with 'option -a' (20,40,60,80,100,120). [default 20]")
+    options.add_option("-r", "--rank", dest="url",
+                      help="show the alexa rank for these url")
     parser.add_option_group(options)
     
 
@@ -153,6 +179,11 @@ def main():
 	if options.ulimit:
 		google(options.term)
 	else: googledefault(options.term)
+
+	# ranking
+    if options.url:
+	url = options.url
+	get_alexa_rank(url)
 
 if __name__ == "__main__":
     main()
