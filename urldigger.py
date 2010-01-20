@@ -37,84 +37,90 @@ def google(termtosearch):
 
 
 def alexa(country, n):
-	if country == "ES":
+	if country in ('ES', 'EN'):
 		if n > 1:
 			num = calculateN(n)
-			alexaES(num)
+			alexa_custom(country, num)
 		else:
-			alexaES(1)
-	elif country == "EN":
-		if n >= 1:
-			# max 24 number = 2400 results. To-check
-			num = calculateN(n)
-			alexaEN(num)
-		else: alexaEN(2)
+			alexa_custom(country, 1)
+	else:
+		print "Invalid country"
 
 
 def calculateN(n):
 	if n == 20:
-		return(2)
+		return(1)
 	elif n == 40:
-		return(3)
+		return(2)
 	elif n == 60:
-		return(4)
+		return(3)
 	elif n == 80:
-		return(5)
+		return(4)
 	elif n == 100:
-		return(6)
+		return(5)
 	elif n == 120:
-		return(7)
+		return(6)
 	elif n == 140:
-		return(8)
+		return(7)
 	elif n == 160:
-		return(9)
+		return(8)
 	elif n == 180:
-		return(10)
+		return(9)
 	elif n == 200:
-		return(11)
+		return(10)
 	
 	# Default return 2 -> 20 results
 	else: return(2)
 
 
-def alexaES(num):
+def alexa_custom(country, num):
 
-	url = "http://www.alexa.com/topsites/countries/ES"
+	#regex to catch domains in alexa
 	r = '<a  href="/siteinfo/(.*?)"  ><strong>(.*?)</strong>';	
 
-	if num == 1:
-		for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
-			print '%s'  % (m[0])
+	if (country == "EN" and num == 1):
+		alexaEN(num)
 	else:
-		for i in range(num):
-			u = "http://www.alexa.com/topsites/countries;%d/ES" %i
-			for x, m in enumerate(re.findall(r, urllib2.urlopen(u).read())):
-				print '%s' %(m[0])
+		if (country == "EN"):
+			for i in range(num):
+				url ="http://www.alexa.com/topsites/global;%d" %i
+				for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
+					print '%s' % (m[0])
+		else:
+			url = "http://www.alexa.com/topsites/countries/%s" %country
+			if num == 1:
+				for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
+					print '%s'  % (m[0])
+			else:
+				for i in range(num):
+					u = "http://www.alexa.com/topsites/countries;%d/ES" %i
+					for x, m in enumerate(re.findall(r, urllib2.urlopen(u).read())):
+						print '%s' %(m[0])
 			
 
 
 def alexaEN(num):
-	url ="\"http://www.alexa.com/topsites/global;\""
-	# n=2 -> 20 results
-	n = 1
-	while (n < num):
-		top100 = url + repr(n)
-		comando = "./hrefs.sh " + top100
-		os.system(comando + '|grep -v alexa') 
-		n+=1
+	url ="http://www.alexa.com/topsites/global"
+	r = '<a  href="/siteinfo/(.*?)"  ><strong>(.*?)</strong>';	
+
+	for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
+		print '%s' % (m[0])
 
 
 def alexaHOT():
-	alexa = "http://www.alexa.com/hoturls"
-	comando = "./hrefs.sh " + alexa
-	os.system(comando + '|grep -v alexa')
+	url = "http://www.alexa.com/hoturls"
+	r = "<a class='offsite' href='(.*?)'>";
 
+	for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
+		print '%s' % (m)
+	
 
 #http://code.prashanthellina.com/code/get_alexa_rank.py
 def get_alexa_rank(url):
 	print 'Getting alexa rank for %s' % url
 	data = urllib2.urlopen('http://data.alexa.com/data?cli=10&dat=snbamz&url=%s' % (url)).read()
 
+	#regexp modified to accept domains with numbers
 	popularity = re.findall("POPULARITY.*TEXT=\"(\d+)\"\/>",data)
 	if popularity:
 		popularity = popularity[0]
