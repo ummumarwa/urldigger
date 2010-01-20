@@ -4,12 +4,10 @@ import os
 import urllib2
 import re
 import optparse
-#from optparse import OptionParser
-
 # (check this library on run time)
 from xgoogle.search import GoogleSearch, SearchError
 
-# by default only print 100 first results
+################FUNCTIONS####################################
 def googledefault(termtosearch):
 	try:
 	  gs = GoogleSearch(termtosearch)
@@ -19,6 +17,7 @@ def googledefault(termtosearch):
 	    print res.url.encode('utf8')
 	except SearchError, e:
 	  print "Search failed: %s" % e
+
 
 def google(termtosearch):
 	try:
@@ -130,6 +129,7 @@ def get_alexa_rank(url):
 def show_alexa_data(url):
 	print 'Getting alexa data for %s' % url	
 	
+################END FUNCTIONS################################
 
 	
 def main():
