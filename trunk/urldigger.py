@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 import os
-import urllib
 import urllib2
 import re
 import optparse
@@ -39,7 +38,11 @@ def google(termtosearch):
 
 def alexa(country, n):
 	if country == "ES":
-		alexaES("ES")
+		if n > 1:
+			num = calculateN(n)
+			alexaES(num)
+		else:
+			alexaES(1)
 	elif country == "EN":
 		if n >= 1:
 			# max 24 number = 2400 results. To-check
@@ -74,12 +77,20 @@ def calculateN(n):
 	else: return(2)
 
 
-def alexaES(country):
+def alexaES(num):
+
 	url = "http://www.alexa.com/topsites/countries/ES"
 	r = '<a  href="/siteinfo/(.*?)"  ><strong>(.*?)</strong>';	
 
-	for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
-		print '%s'  % (m[0])
+	if num == 1:
+		for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
+			print '%s'  % (m[0])
+	else:
+		for i in range(num):
+			u = "http://www.alexa.com/topsites/countries;%d/ES" %i
+			for x, m in enumerate(re.findall(r, urllib2.urlopen(u).read())):
+				print '%s' %(m[0])
+			
 
 
 def alexaEN(num):
@@ -162,7 +173,10 @@ def main():
 
     if options.country:
 	if options.country == 'ES':
-		alexa("ES", 1)
+		if options.number:
+			alexa("ES", options.number)
+		else:
+			alexa("ES", 1)
 	elif options.country == 'EN':
 		if options.number:
 			alexa("EN", options.number)
