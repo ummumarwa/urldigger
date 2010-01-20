@@ -142,6 +142,8 @@ def main():
 			help="get hot urls from alexa. [default 20]")
     commands.add_option("-u", "--ulimit", action="store_true",
                       help="no limit in the number of search url gets from google with '-g option'")
+    commands.add_option("-b", "--brute", action="store_true",
+                      help="show the max url numbers from all options availables")
     parser.add_option_group(commands)
 
 
@@ -204,6 +206,12 @@ def main():
     if options.url:
 	url = options.url
 	get_alexa_rank(url)
+
+    if options.brute:
+	alexa("ES", 200)
+	alexa("EN", 200)
+	alexaHOT()
+
 
 if __name__ == "__main__":
     main()
