@@ -133,19 +133,55 @@ def show_alexa_data(url):
 def hot_twitter():
 	url = "http://search.twitter.com/"
 	r = "(\/intra\/trend/(.*?)')";
+	words = []
 
 	for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
 		word = m[1]
 		if word[:3] == "%23":
 			word = word.replace("%23", "")
-			print '%s' % (word)
+			#print '%s' % (word)
+			words.append(word)
 		else:
-			print word
+			#print word
+			words.append(word)
+
+	print words
 
 def search_twitts_google():
-	for x in enumerate(hot_twitter()):
-		google(x)
+	hot_twitter()
+
+def google_trends():
+	trends = []
+	user_agent = 'Mozilla/5.0 (compatible; MSIE 7.0; Windows NT 6.0; en-US)'
+
+	search = "http://www.google.com/trends/hottrends"
+
+	req = urllib2.Request(search)
+	req.add_header('User-Agent', user_agent)	
+
+	try:
+		response = urllib2.urlopen(req)
+	except urllib2.HTTPError, e:
+		print "Error ", e.code, search
+		sys.exit()
+
+	lines = response.readlines()
 	
+	for line in lines:
+		if line.find("trends/hottrends") != -1:
+			#cut line until trends/hottrends
+			line = line[line.find("trends/hottrends"):]
+			#trend begins after <
+			line = line[line.find(">")+1:]
+			#trends ends before >
+			trend = line[:line.find("<")]
+	
+			#print trend	
+			if len(trend) > 0 and trend[1] != " " and trend != "Site Feed":
+				trends.append(trend)
+				#print trend
+	
+	print trends
 	
 	
 ################END FUNCTIONS################################
@@ -157,6 +193,8 @@ def main():
 
     # Commands
     commands = optparse.OptionGroup(parser, "Commands")
+    commands.add_option("-G", "--googhot", action="store_true",
+			help="get hot searchs from google. [default 20]")
     commands.add_option("-H", "--hot", action="store_true",
 			help="get hot urls from alexa. [default 20]")
     commands.add_option("-T", "--twitter", action="store_true",
@@ -234,6 +272,13 @@ def main():
 
     if options.twitter:
 	hot_twitter()
+
+    if options.googhot:
+	google_trends()
+
+    if options.test:
+	google_trends()
+
 
 
 if __name__ == "__main__":
