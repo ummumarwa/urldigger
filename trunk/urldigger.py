@@ -129,6 +129,24 @@ def get_alexa_rank(url):
 
 def show_alexa_data(url):
 	print 'Getting alexa data for %s' % url	
+
+def hot_twitter():
+	url = "http://search.twitter.com/"
+	r = "(\/intra\/trend/(.*?)')";
+
+	for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
+		word = m[1]
+		if word[:3] == "%23":
+			word = word.replace("%23", "")
+			print '%s' % (word)
+		else:
+			print word
+
+def search_twitts_google():
+	for x in enumerate(hot_twitter()):
+		google(x)
+	
+	
 	
 ################END FUNCTIONS################################
 
@@ -141,10 +159,14 @@ def main():
     commands = optparse.OptionGroup(parser, "Commands")
     commands.add_option("-H", "--hot", action="store_true",
 			help="get hot urls from alexa. [default 20]")
+    commands.add_option("-T", "--twitter", action="store_true",
+			help="get hot topics from twitter main page.")
     commands.add_option("-u", "--ulimit", action="store_true",
                       help="no limit in the number of search url gets from google with '-g option'")
     commands.add_option("-b", "--brute", action="store_true",
                       help="show the max url numbers from all options availables")
+    commands.add_option("-t", "--test", action="store_true",
+                      help="only for internal tests. Do not use")
     parser.add_option_group(commands)
 
 
@@ -209,6 +231,9 @@ def main():
 	alexa("ES", 200)
 	alexa("EN", 200)
 	alexaHOT()
+
+    if options.twitter:
+	hot_twitter()
 
 
 if __name__ == "__main__":
