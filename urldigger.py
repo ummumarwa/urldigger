@@ -130,6 +130,7 @@ def get_alexa_rank(url):
 def show_alexa_data(url):
 	print 'Getting alexa data for %s' % url	
 
+
 def hot_twitter():
 	url = "http://search.twitter.com/"
 	r = "(\/intra\/trend/(.*?)')";
@@ -142,13 +143,20 @@ def hot_twitter():
 			#print '%s' % (word)
 			words.append(word)
 		else:
-			#print word
 			words.append(word)
 
-	print words
+	return words
 
-def search_twitts_google():
-	hot_twitter()
+
+def urls_hot_twitter():
+	#manual exclusion
+	nowatch = ['nowplaying'] 
+	twitt = []
+	a = hot_twitter()
+	for i, w in enumerate(a):
+		if w not in nowatch:
+			google(w)
+
 
 def google_trends():
 	trends = []
@@ -179,9 +187,14 @@ def google_trends():
 			#print trend	
 			if len(trend) > 0 and trend[1] != " " and trend != "Site Feed":
 				trends.append(trend)
-				#print trend
 	
-	print trends
+	return trends
+
+
+def urls_google_trends():
+	a = google_trends()
+	for i,w in enumerate(a):
+		google(w)
 	
 	
 ################END FUNCTIONS################################
@@ -199,6 +212,10 @@ def main():
 			help="get hot urls from alexa. [default 20]")
     commands.add_option("-T", "--twitter", action="store_true",
 			help="get hot topics from twitter main page.")
+    commands.add_option("-U", "--googhoturls", action="store_true",
+                      help="get urls from google trends. Use with caution due to it return thoushands of urls")
+    commands.add_option("-W", "--twitthoturls", action="store_true",
+                      help="get urls from twitter hot words. Use with caution due to it return thoushands of urls")
     commands.add_option("-u", "--ulimit", action="store_true",
                       help="no limit in the number of search url gets from google with '-g option'")
     commands.add_option("-b", "--brute", action="store_true",
@@ -271,13 +288,23 @@ def main():
 	alexaHOT()
 
     if options.twitter:
-	hot_twitter()
+	av = hot_twitter()
+	print av
 
     if options.googhot:
-	google_trends()
+	av = google_trends()
+	print av
+
+    if options.googhoturls:
+	urls_google_trends()
+
+    if options.twitthoturls:
+	av = urls_hot_twitter()
+	print av
 
     if options.test:
-	google_trends()
+	av = urls_hot_twitter()
+	print av
 
 
 
