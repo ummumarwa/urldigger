@@ -74,6 +74,8 @@ def calculateN(n):
 
 def alexa_custom(country, num):
 
+	# Alexa has been trying to obfuscate their HTML pages to prevent scrapping.
+	# Maybe this code stops to work in a few time.
 	#regex to catch domains in alexa
 	r = '<a  href="/siteinfo/(.*?)"  ><strong>(.*?)</strong>';	
 
@@ -120,15 +122,12 @@ def get_alexa_rank(url):
 	print 'Getting alexa rank for %s' % url
 	data = urllib2.urlopen('http://data.alexa.com/data?cli=10&dat=snbamz&url=%s' % (url)).read()
 
-	#regexp modified to accept domains with numbers
+	#regexp modified from -http://code.prashanthellina.com/code/get_alexa_rank.py- to accept domains with numbers
 	popularity = re.findall("POPULARITY.*TEXT=\"(\d+)\"\/>",data)
 	if popularity:
 		popularity = popularity[0]
 	print "%s esta en el ranking de alexa el: %s" % (url,popularity)
 
-
-def show_alexa_data(url):
-	print 'Getting alexa data for %s' % url	
 
 
 def hot_twitter():
@@ -150,12 +149,13 @@ def hot_twitter():
 
 def urls_hot_twitter():
 	#manual exclusion
-	nowatch = ['nowplaying'] 
+	nowatch = ['nowplaying','Goodnight'] 
 	twitt = []
 	a = hot_twitter()
 	for i, w in enumerate(a):
 		if w not in nowatch:
 			google(w)
+
 
 
 def google_trends():
@@ -191,6 +191,12 @@ def google_trends():
 	return trends
 
 
+#Take care using the following function. 
+#If running this option you see something similar to "Search failed: Failed getting 
+#http://www.google.com/search?hl=en&q=jersey=Google+Search: HTTP Error 503: Service Unavailable
+#then:
+#http://googleonlinesecurity.blogspot.com/2007/07/reason-behind-were-sorry-message.html
+
 def urls_google_trends():
 	a = google_trends()
 	for i,w in enumerate(a):
@@ -201,25 +207,25 @@ def urls_google_trends():
 
 	
 def main():
-    usage = "usage: %prog [options] arg"
+    usage = "usage: %prog [options] arg. -h to show HELP"
     parser = optparse.OptionParser(usage)
 
     # Commands
     commands = optparse.OptionGroup(parser, "Commands")
     commands.add_option("-G", "--googhot", action="store_true",
-			help="get hot searchs from google. [default 20]")
+			help="show hot searchs from google. [default 20].")
     commands.add_option("-H", "--hot", action="store_true",
-			help="get hot urls from alexa. [default 20]")
+			help="get hot urls from alexa. [default 20].")
     commands.add_option("-T", "--twitter", action="store_true",
-			help="get hot topics from twitter main page.")
+			help="show hot topics from twitter main page.")
     commands.add_option("-U", "--googhoturls", action="store_true",
-                      help="get urls from google trends. Use with caution due to it return thoushands of urls")
+                      help="get urls from google trends. Use with caution due to it return thoushands of urls.")
     commands.add_option("-W", "--twitthoturls", action="store_true",
-                      help="get urls from twitter hot words. Use with caution due to it return thoushands of urls")
+                      help="get urls from twitter hot words. Use with caution due to it return thoushands of urls.")
     commands.add_option("-u", "--ulimit", action="store_true",
-                      help="no limit in the number of search url gets from google with '-g option'")
+                      help="no limit in the number of search url gets from google with '-g option'.")
     commands.add_option("-b", "--brute", action="store_true",
-                      help="show the max url numbers from all options availables")
+                      help="show the max url numbers from all options availables.")
     commands.add_option("-t", "--test", action="store_true",
                       help="only for internal tests. Do not use")
     parser.add_option_group(commands)
@@ -228,13 +234,13 @@ def main():
     # Options
     options = optparse.OptionGroup(parser, "Options")
     options.add_option("-a", "--alexa", dest="country", 
-			help="get urls from alexa top sites with selected country (EN, ES). [default 20]")
+			help="get urls from alexa top sites with selected country (EN, ES) [default 20].")
     options.add_option("-g", "--goog", dest="term",
-                      help="get urls with search term=term from google [default 50]")
+                      help="get urls with search term=term from google [default 50].")
     options.add_option("-n", "--num", dest="number", type="int",
-                      help="specify number urls to get with 'option -a' (20,40,60,80,100,120). [default 20]")
+                      help="specify number urls to get with 'option -a' (20,40,60,.. 200). [default 20]")
     options.add_option("-r", "--rank", dest="url",
-                      help="show the alexa rank for these url")
+                      help="show the alexa rank for these url.")
     parser.add_option_group(options)
     
 
@@ -282,10 +288,13 @@ def main():
 	url = options.url
 	get_alexa_rank(url)
 
+	# Be cautions with this option. Took about 9 min in my laptop
     if options.brute:
 	alexa("ES", 200)
 	alexa("EN", 200)
 	alexaHOT()
+	urls_google_trends()
+	urls_hot_twitter()	
 
     if options.twitter:
 	av = hot_twitter()
