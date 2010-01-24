@@ -1,5 +1,31 @@
 #!/usr/bin/python
 
+# Distributed under MIT license:
+#
+# Copyright (c) 2010 Emilio Casbas
+#
+# Permission is hereby granted, free of charge, to any person
+# Obtaining a copy of this software and associated documentation
+# Files (the "Software"), to deal in the Software without
+# Restriction, including without limitation the rights to use,
+# Copy, modify, merge, publish, distribute, sublicense, and/or sell
+# Copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following
+# Conditions:
+#
+# The above copyright notice and this permission notice shall be
+# Included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+# WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+#
+
 import os
 import urllib2
 import re
@@ -7,7 +33,6 @@ import optparse
 #External dependency. Get it from http://www.catonmat.net/download/xgoogle.zip
 from xgoogle.search import GoogleSearch, SearchError
 
-################FUNCTIONS####################################
 def googledefault(termtosearch):
 	try:
 	  gs = GoogleSearch(termtosearch)
@@ -117,7 +142,6 @@ def alexaHOT():
 		print '%s' % (m)
 	
 
-#http://code.prashanthellina.com/code/get_alexa_rank.py
 def get_alexa_rank(url):
 	print 'Getting alexa rank for %s' % url
 	data = urllib2.urlopen('http://data.alexa.com/data?cli=10&dat=snbamz&url=%s' % (url)).read()
@@ -127,7 +151,6 @@ def get_alexa_rank(url):
 	if popularity:
 		popularity = popularity[0]
 	print "%s esta en el ranking de alexa el: %s" % (url,popularity)
-
 
 
 def hot_twitter():
@@ -155,7 +178,6 @@ def urls_hot_twitter():
 	for i, w in enumerate(a):
 		if w not in nowatch:
 			google(w)
-
 
 
 def google_trends():
@@ -196,15 +218,13 @@ def google_trends():
 #http://www.google.com/search?hl=en&q=jersey=Google+Search: HTTP Error 503: Service Unavailable
 #then:
 #http://googleonlinesecurity.blogspot.com/2007/07/reason-behind-were-sorry-message.html
-
 def urls_google_trends():
 	a = google_trends()
 	for i,w in enumerate(a):
 		google(w)
 	
 	
-################END FUNCTIONS################################
-
+#############################################################################################
 	
 def main():
     usage = "usage: %prog [options] arg. -h to show HELP"
@@ -230,7 +250,6 @@ def main():
                       help="only for internal tests. Do not use")
     parser.add_option_group(commands)
 
-
     # Options
     options = optparse.OptionGroup(parser, "Options")
     options.add_option("-a", "--alexa", dest="country", 
@@ -242,7 +261,6 @@ def main():
     options.add_option("-r", "--rank", dest="url",
                       help="show the alexa rank for these url.")
     parser.add_option_group(options)
-    
 
     # Output
     output = optparse.OptionGroup(parser, "Output")
@@ -256,10 +274,11 @@ def main():
 
     if len(args) == 1:
 	print "URL digger services (extract urls from websites)"
-	print "by user (mail at user)"
+	print "by ecasbas (ecasbas at gmail.com)"
 	print
         parser.error("incorrect number of arguments")
 
+	#TODO: implement to show function actions in the output
     if options.verbose:
         print "reading %s..." % options.filename
 
@@ -288,7 +307,7 @@ def main():
 	url = options.url
 	get_alexa_rank(url)
 
-	# Be cautions with this option. Took about 9 min in my laptop
+	# Be careful with this option. Took about 9 min in my laptop
     if options.brute:
 	alexa("ES", 200)
 	alexa("EN", 200)
