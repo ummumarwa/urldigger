@@ -300,11 +300,11 @@ def main():
 		if options.number:
 			alexa("ES", options.number, None)
 		else:
-			alexa("ES", 1)
+			alexa("ES", 1, None)
 	elif options.country == 'EN':
 		if options.number:
 			alexa("EN", options.number)
-		else: alexa("EN", 1)
+		else: alexa("EN", 1, None)
 	else: print 'country option: \'%s\' not valid' %options.country
 
     if options.hot:
