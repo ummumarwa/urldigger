@@ -3,6 +3,10 @@
 # Distributed under MIT license:
 #
 # Copyright (c) 2010 Emilio Casbas
+
+# CONTRIBUTORS
+# Clemens Kurtenbach
+
 #
 # Permission is hereby granted, free of charge, to any person
 # Obtaining a copy of this software and associated documentation
@@ -24,6 +28,7 @@
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
+#
 #
 
 import os
@@ -216,7 +221,7 @@ def google_trends():
 #Take care using the following function. 
 #If running this option you see something similar to "Search failed: Failed getting 
 #http://www.google.com/search?hl=en&q=jersey=Google+Search: HTTP Error 503: Service Unavailable
-#then:
+#then: http://www.google.com/support/websearch/bin/answer.py?answer=86640
 #http://googleonlinesecurity.blogspot.com/2007/07/reason-behind-were-sorry-message.html
 def urls_google_trends():
 	a = google_trends()
