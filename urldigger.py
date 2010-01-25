@@ -35,6 +35,8 @@ import os
 import urllib2
 import re
 import optparse
+import thread
+from time import sleep, ctime
 #External dependency. Get it from http://www.catonmat.net/download/xgoogle.zip
 from xgoogle.search import GoogleSearch, SearchError
 
@@ -65,7 +67,7 @@ def google(termtosearch):
 	  print "Search failed: %s" % e	
 
 
-def alexa(country, n):
+def alexa(country, n, lock):
 	if country in ('ES', 'EN'):
 		if n > 1:
 			num = calculateN(n)
@@ -74,6 +76,9 @@ def alexa(country, n):
 			alexa_custom(country, 1)
 	else:
 		print "Invalid country"
+
+	if lock != None:
+		lock.release()
 
 
 def calculateN(n):
@@ -139,12 +144,15 @@ def alexaEN(num):
 		print '%s' % (m[0])
 
 
-def alexaHOT():
+def alexaHOT(lock):
 	url = "http://www.alexa.com/hoturls"
 	r = "<a class='offsite' href='(.*?)'>";
 
 	for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
 		print '%s' % (m)
+
+	if lock != None:
+		lock.release()
 	
 
 def get_alexa_rank(url):
@@ -290,7 +298,7 @@ def main():
     if options.country:
 	if options.country == 'ES':
 		if options.number:
-			alexa("ES", options.number)
+			alexa("ES", options.number, None)
 		else:
 			alexa("ES", 1)
 	elif options.country == 'EN':
@@ -300,7 +308,7 @@ def main():
 	else: print 'country option: \'%s\' not valid' %options.country
 
     if options.hot:
-	alexaHOT()
+	alexaHOT(None)
 
     if options.term:
 	if options.ulimit:
@@ -312,13 +320,26 @@ def main():
 	url = options.url
 	get_alexa_rank(url)
 
-	# Be careful with this option. Took about 9 min in my laptop
+	# Be careful with this option. Took about 9 min in my laptop (without threads!)
+	# TODO: Multithread processing with Threading module
     if options.brute:
-	alexa("ES", 200)
-	alexa("EN", 200)
-	alexaHOT()
-	urls_google_trends()
-	urls_hot_twitter()	
+	locks = []
+	loops = 3
+	for i in range(loops):
+		lock = thread.allocate_lock()
+		lock.acquire()
+		locks.append(lock)
+
+	for i in range(loops):
+		thread.start_new_thread(alexa, ( "ES", 200, locks[i]))
+		thread.start_new_thread(alexa, ("EN", 200, locks[i]))
+		thread.start_new_thread(alexaHOT, (locks[i],))
+
+	for i in range(loops):
+		while locks[i].locked(): pass
+
+	#urls_google_trends()
+	#urls_hot_twitter()	
 
     if options.twitter:
 	av = hot_twitter()
