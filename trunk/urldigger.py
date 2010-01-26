@@ -4,6 +4,7 @@
 #
 # Copyright (c) 2010 Emilio Casbas
 
+
 # CONTRIBUTORS
 # Clemens Kurtenbach
 
@@ -35,7 +36,7 @@ import os
 import urllib2
 import re
 import optparse
-import thread
+import threading
 from time import sleep, ctime
 #External dependency. Get it from http://www.catonmat.net/download/xgoogle.zip
 from xgoogle.search import GoogleSearch, SearchError
@@ -67,7 +68,7 @@ def google(termtosearch):
 	  print "Search failed: %s" % e	
 
 
-def alexa(country, n, lock):
+def alexa(country, n):
 	if country in ('ES', 'EN'):
 		if n > 1:
 			num = calculateN(n)
@@ -76,9 +77,6 @@ def alexa(country, n, lock):
 			alexa_custom(country, 1)
 	else:
 		print "Invalid country"
-
-	if lock != None:
-		lock.release()
 
 
 def calculateN(n):
@@ -144,16 +142,13 @@ def alexaEN(num):
 		print '%s' % (m[0])
 
 
-def alexaHOT(lock):
+def alexaHOT():
 	url = "http://www.alexa.com/hoturls"
 	r = "<a class='offsite' href='(.*?)'>";
 
 	for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
 		print '%s' % (m)
 
-	if lock != None:
-		lock.release()
-	
 
 def get_alexa_rank(url):
 	print 'Getting alexa rank for %s' % url
@@ -183,7 +178,7 @@ def hot_twitter():
 	return words
 
 
-def urls_hot_twitter():
+def urls_hot_twitter(lock):
 	#manual exclusion
 	nowatch = ['nowplaying','Goodnight'] 
 	twitt = []
@@ -191,6 +186,9 @@ def urls_hot_twitter():
 	for i, w in enumerate(a):
 		if w not in nowatch:
 			google(w)
+
+	if lock != None:
+		lock.release()
 
 
 def google_trends():
@@ -231,10 +229,13 @@ def google_trends():
 #http://www.google.com/search?hl=en&q=jersey=Google+Search: HTTP Error 503: Service Unavailable
 #then: http://www.google.com/support/websearch/bin/answer.py?answer=86640
 #http://googleonlinesecurity.blogspot.com/2007/07/reason-behind-were-sorry-message.html
-def urls_google_trends():
+def urls_google_trends(lock):
 	a = google_trends()
 	for i,w in enumerate(a):
 		google(w)
+
+	if lock != None:
+		lock.release()
 	
 	
 #############################################################################################
@@ -298,17 +299,17 @@ def main():
     if options.country:
 	if options.country == 'ES':
 		if options.number:
-			alexa("ES", options.number, None)
+			alexa("ES", options.number)
 		else:
-			alexa("ES", 1, None)
+			alexa("ES", 1)
 	elif options.country == 'EN':
 		if options.number:
 			alexa("EN", options.number)
-		else: alexa("EN", 1, None)
+		else: alexa("EN", 1)
 	else: print 'country option: \'%s\' not valid' %options.country
 
     if options.hot:
-	alexaHOT(None)
+	alexaHOT()
 
     if options.term:
 	if options.ulimit:
@@ -323,20 +324,26 @@ def main():
 	# Be careful with this option. Took about 9 min in my laptop (without threads!)
 	# TODO: Multithread processing with Threading module
     if options.brute:
-	locks = []
+	threads = []
 	loops = 3
-	for i in range(loops):
-		lock = thread.allocate_lock()
-		lock.acquire()
-		locks.append(lock)
 
 	for i in range(loops):
-		thread.start_new_thread(alexa, ( "ES", 200, locks[i]))
-		thread.start_new_thread(alexa, ("EN", 200, locks[i]))
-		thread.start_new_thread(alexaHOT, (locks[i],))
+		t = threading.Thread(target=alexa, args=("ES", 200))
+		threads.append(t)
+		t = threading.Thread(target=alexa, args=("EN", 200))
+		threads.append(t)
+		t = threading.Thread(target=alexaHOT, args=())
+		threads.append(t)
+		#old method with threads. Update
+		#thread.start_new_thread(urls_google_trends, (locks[i],))
+		#thread.start_new_thread(urls_hot_twitter, ( locks[i],))
 
 	for i in range(loops):
-		while locks[i].locked(): pass
+		threads[i].start()
+
+	for i in range(loops):
+		threads[i].join()
+
 
 	#urls_google_trends()
 	#urls_hot_twitter()	
@@ -350,10 +357,10 @@ def main():
 	print av
 
     if options.googhoturls:
-	urls_google_trends()
+	urls_google_trends(None)
 
     if options.twitthoturls:
-	av = urls_hot_twitter()
+	av = urls_hot_twitter(None)
 	print av
 
     if options.test:
