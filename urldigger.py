@@ -178,7 +178,7 @@ def hot_twitter():
 	return words
 
 
-def urls_hot_twitter(lock):
+def urls_hot_twitter():
 	#manual exclusion
 	nowatch = ['nowplaying','Goodnight'] 
 	twitt = []
@@ -186,9 +186,6 @@ def urls_hot_twitter(lock):
 	for i, w in enumerate(a):
 		if w not in nowatch:
 			google(w)
-
-	if lock != None:
-		lock.release()
 
 
 def google_trends():
@@ -229,14 +226,11 @@ def google_trends():
 #http://www.google.com/search?hl=en&q=jersey=Google+Search: HTTP Error 503: Service Unavailable
 #then: http://www.google.com/support/websearch/bin/answer.py?answer=86640
 #http://googleonlinesecurity.blogspot.com/2007/07/reason-behind-were-sorry-message.html
-def urls_google_trends(lock):
+def urls_google_trends():
 	a = google_trends()
 	for i,w in enumerate(a):
 		google(w)
 
-	if lock != None:
-		lock.release()
-	
 	
 #############################################################################################
 	
@@ -321,22 +315,21 @@ def main():
 	url = options.url
 	get_alexa_rank(url)
 
-	# Be careful with this option. Took about 9 min in my laptop (without threads!)
-	# TODO: Multithread processing with Threading module
+	# Be careful with this option. Took about 7 min in my laptop.
     if options.brute:
 	threads = []
-	loops = 3
+	loops = 5
 
-	for i in range(loops):
-		t = threading.Thread(target=alexa, args=("ES", 200))
-		threads.append(t)
-		t = threading.Thread(target=alexa, args=("EN", 200))
-		threads.append(t)
-		t = threading.Thread(target=alexaHOT, args=())
-		threads.append(t)
-		#old method with threads. Update
-		#thread.start_new_thread(urls_google_trends, (locks[i],))
-		#thread.start_new_thread(urls_hot_twitter, ( locks[i],))
+	t = threading.Thread(target=alexa, args=("ES", 200))
+	threads.append(t)
+	t = threading.Thread(target=alexa, args=("EN", 200))
+	threads.append(t)
+	t = threading.Thread(target=alexaHOT, args=())
+	threads.append(t)
+	t = threading.Thread(target=urls_google_trends, args=())
+	threads.append(t)
+	t = threading.Thread(target=urls_hot_twitter, args=())
+	threads.append(t)
 
 	for i in range(loops):
 		threads[i].start()
@@ -344,9 +337,6 @@ def main():
 	for i in range(loops):
 		threads[i].join()
 
-
-	#urls_google_trends()
-	#urls_hot_twitter()	
 
     if options.twitter:
 	av = hot_twitter()
@@ -360,7 +350,7 @@ def main():
 	urls_google_trends(None)
 
     if options.twitthoturls:
-	av = urls_hot_twitter(None)
+	av = urls_hot_twitter()
 	print av
 
     if options.test:
