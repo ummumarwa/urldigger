@@ -30,7 +30,15 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 #
+
+# TODO: New option to add sources of malicious urls
 #
+# http://hosts-file.net/
+# http://www.malwaredomains.com/
+# http://www.mwsl.org.cn/
+# http://www.malwareurl.com/
+# http://www.malwaredomainlist.com/
+
 
 import os
 import urllib2
