@@ -239,7 +239,17 @@ def urls_google_trends():
 	for i,w in enumerate(a):
 		google(w)
 
-	
+
+#TODO: Improve the regexp
+def urls_malwaredomains():
+	url = "http://www.malwaredomains.com"
+	r = '<td>(.*?)</td>';
+
+	for x, y in enumerate(re.findall(r, urllib2.urlopen(url).read())):
+		y = y.replace(" ", "")
+		print y
+
+
 #############################################################################################
 	
 def main():
@@ -252,6 +262,8 @@ def main():
 			help="show hot searchs from google. [default 20].")
     commands.add_option("-H", "--hot", action="store_true",
 			help="get hot urls from alexa. [default 20].")
+    commands.add_option("-m", "--malwaredomains", action="store_true",
+			help="[EXPERIMENTAL] show malicious urls from malwaredomains.com page.")
     commands.add_option("-T", "--twitter", action="store_true",
 			help="show hot topics from twitter main page.")
     commands.add_option("-U", "--googhoturls", action="store_true",
@@ -355,7 +367,10 @@ def main():
 	print av
 
     if options.googhoturls:
-	urls_google_trends(None)
+	urls_google_trends()
+
+    if options.malwaredomains:
+	urls_malwaredomains()
 
     if options.twitthoturls:
 	av = urls_hot_twitter()
