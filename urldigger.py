@@ -32,12 +32,17 @@
 #
 
 # TODO: New option to add sources of malicious urls
+#  http://hosts-file.net/
+#  http://www.malwaredomains.com/ (added)
+#  http://www.mwsl.org.cn/
+#  http://www.malwareurl.com/
+#  http://www.malwaredomainlist.com/
+# 
+#  * Clean and optimize code, identantion (now only functional)
+#  * More sources in a consistent way
 #
-# http://hosts-file.net/
-# http://www.malwaredomains.com/ (added)
-# http://www.mwsl.org.cn/
-# http://www.malwareurl.com/
-# http://www.malwaredomainlist.com/
+# Feedback and improvements are welcome! :-)
+#
 
 
 import os
