@@ -2,7 +2,7 @@
 
 # Distributed under MIT license:
 #
-# Copyright (c) 2010 Emilio Casbas
+# Copyright (c) 2010 Emilio Casbas (ecasbas at gmail dot com)
 
 
 # CONTRIBUTORS
@@ -34,7 +34,7 @@
 # TODO: New option to add sources of malicious urls
 #
 # http://hosts-file.net/
-# http://www.malwaredomains.com/
+# http://www.malwaredomains.com/ (added)
 # http://www.mwsl.org.cn/
 # http://www.malwareurl.com/
 # http://www.malwaredomainlist.com/
@@ -46,8 +46,9 @@ import re
 import optparse
 import threading
 from time import sleep, ctime
-#External dependency. Get it from http://www.catonmat.net/download/xgoogle.zip
+#Thanks to Peteris Krumins for give permission and authored this great library
 from xgoogle.search import GoogleSearch, SearchError
+
 
 def googledefault(termtosearch):
 	try:
@@ -187,7 +188,7 @@ def hot_twitter():
 
 
 def urls_hot_twitter():
-	#manual exclusion
+	#manual exclusion. Put here you words to avoid them
 	nowatch = ['nowplaying','Goodnight'] 
 	twitt = []
 	a = hot_twitter()
@@ -199,7 +200,6 @@ def urls_hot_twitter():
 def google_trends():
 	trends = []
 	user_agent = 'Mozilla/5.0 (compatible; MSIE 7.0; Windows NT 6.0; en-US)'
-
 	search = "http://www.google.com/trends/hottrends"
 
 	req = urllib2.Request(search)
@@ -310,8 +310,6 @@ def main():
     output = optparse.OptionGroup(parser, "Output")
     output.add_option("-v", "--verbose",
                       action="store_true", dest="verbose")
-    output.add_option("-q", "--quiet",
-                      action="store_false", dest="verbose")
     parser.add_option_group(output)
 
     (options, args) = parser.parse_args()
@@ -327,6 +325,7 @@ def main():
         print "reading %s..." % options.filename
 
     if options.country:
+	#TODO: implement more countries
 	if options.country == 'ES':
 		if options.number:
 			alexa("ES", options.number)
@@ -354,7 +353,7 @@ def main():
 	# Be careful with this option. Took about 7 min in my laptop.
     if options.brute:
 	threads = []
-	loops = 5
+	loops = 6
 
 	t = threading.Thread(target=alexa, args=("ES", 200))
 	threads.append(t)
@@ -365,6 +364,8 @@ def main():
 	t = threading.Thread(target=urls_google_trends, args=())
 	threads.append(t)
 	t = threading.Thread(target=urls_hot_twitter, args=())
+	threads.append(t)
+	t = threading.Thread(target=urls_malwaredomains(), args=())
 	threads.append(t)
 
 	for i in range(loops):
