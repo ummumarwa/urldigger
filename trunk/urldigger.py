@@ -240,15 +240,31 @@ def urls_google_trends():
 		google(w)
 
 
-#TODO: Improve the regexp
 def urls_malwaredomains():
-	url = "http://www.malwaredomains.com"
-	r = '<td>(.*?)</td>';
+	url = "http://www.malwaredomains.com/updates/"
+	files = []
 
-	for x, y in enumerate(re.findall(r, urllib2.urlopen(url).read())):
-		y = y.replace(" ", "")
-		print y
+	#parse to extract txt files with malicious urls
+	lines = urllib2.urlopen(url).readlines()
+	for line in lines:
+		if line.find("A HREF=") and line.find(".txt") != -1:
+			#cut line until a href
+			line = line[line.find("A HREF="):]
+			#file begins after =
+			line = line[line.find("=")+2:]
+			#file ends before "
+			line = line[:line.find("\"")]
+			files.append(line)
 
+	#parse to extract urls from each previous txt files
+	for i,f in enumerate(files):
+		myurl = f
+		urlmal = url + myurl
+		lines = urllib2.urlopen(urlmal).readlines()
+		for line in lines:
+			malurl = line.split()
+			print malurl[0]
+		
 
 #############################################################################################
 	
@@ -263,7 +279,7 @@ def main():
     commands.add_option("-H", "--hot", action="store_true",
 			help="get hot urls from alexa. [default 20].")
     commands.add_option("-m", "--malwaredomains", action="store_true",
-			help="[EXPERIMENTAL] show malicious urls from malwaredomains.com page.")
+			help="show malicious urls from malwaredomains.com page.")
     commands.add_option("-T", "--twitter", action="store_true",
 			help="show hot topics from twitter main page.")
     commands.add_option("-U", "--googhoturls", action="store_true",
