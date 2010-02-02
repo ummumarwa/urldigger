@@ -40,6 +40,9 @@
 # 
 #  * Clean and optimize code, identantion (now only functional)
 #  * More sources in a consistent way
+#  * China searches are highly potential malicious (Baidu...)
+#  * Extract shortened urls and expand them
+#  * Do something with google safe-browsing
 #
 # Feedback and improvements are welcome! :-)
 #
