@@ -36,7 +36,7 @@
 #  http://www.malwaredomains.com/ (added)
 #  http://www.mwsl.org.cn/
 #  http://www.malwareurl.com/
-#  http://www.malwaredomainlist.com/
+#  http://www.malwaredomainlist.com/ (added partially)
 # 
 #  * Clean and optimize code, identantion (now only functional)
 #  * More sources in a consistent way
@@ -200,7 +200,7 @@ def urls_hot_twitter():
 	nowatch = ['nowplaying','Goodnight'] 
 	twitt = []
 	a = hot_twitter()
-	for i, w in enumerate(a):
+	for w in (a):
 		if w not in nowatch:
 			google(w)
 
@@ -272,7 +272,26 @@ def urls_malwaredomains():
 		for line in lines:
 			malurl = line.split()
 			print malurl[0]
-		
+
+def urls_malwaredomainlist():
+	url = "http://www.malwaredomainlist.com/update.php"
+	murls = []
+
+	lines = urllib2.urlopen(url).readlines()
+	for line in lines:
+		if line.find("<tr bgcolor=") != -1 and line.find("</td><td>-</td><td>") ==-1:
+			#cut line until a </td><td>
+			line = line[line.find("</td><td>"):]
+			#url begins after <td>
+			line = line[line.find("<td>")+4:]
+			#url ends before </t
+			line = line[:line.find("</t")]
+			line = line.replace("<wbr>", "")
+			murls.append(line)
+
+	for u in (murls):
+		print u
+	
 
 #############################################################################################
 	
@@ -286,6 +305,8 @@ def main():
 			help="show hot searchs from google. [default 20].")
     commands.add_option("-H", "--hot", action="store_true",
 			help="get hot urls from alexa. [default 20].")
+    commands.add_option("-d", "--malwaredomainlist", action="store_true",
+			help="show malicious urls from malwaredomainlist.com page.")
     commands.add_option("-m", "--malwaredomains", action="store_true",
 			help="show malicious urls from malwaredomains.com page.")
     commands.add_option("-T", "--twitter", action="store_true",
@@ -298,7 +319,7 @@ def main():
                       help="no limit in the number of search url gets from google with '-g option'.")
     commands.add_option("-b", "--brute", action="store_true",
                       help="show the max url numbers from all options availables.")
-    commands.add_option("-t", "--test", action="store_true",
+    commands.add_option("-x", "--test", action="store_true",
                       help="only for internal tests. Do not use")
     parser.add_option_group(commands)
 
@@ -397,13 +418,36 @@ def main():
     if options.malwaredomains:
 	urls_malwaredomains()
 
+    if options.malwaredomainlist:
+	urls_malwaredomainlist()
+
     if options.twitthoturls:
 	av = urls_hot_twitter()
 	print av
 
     if options.test:
-	av = urls_hot_twitter()
-	print av
+	threads = []
+	#loops = ["urls_hot_twitter(),", "urls_google_trends(),", "alexaHOT(),"]
+	loops = 3
+	#for f in loops:
+		#t = threading.Thread(target=f, args())
+		#threads.append(t)
+		#print f
+
+	t = threading.Thread(target=alexaHOT, args=())
+	threads.append(t)
+	t = threading.Thread(target=urls_google_trends, args=())
+	threads.append(t)
+	t = threading.Thread(target=urls_hot_twitter, args=())
+	threads.append(t)
+
+	for i in range(loops):
+		threads[i].start()
+
+	for i in range(loops):
+		threads[i].join()
+	
+
 
 
 
