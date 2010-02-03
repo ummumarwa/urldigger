@@ -40,6 +40,7 @@
 # 
 #  * Clean and optimize code, identantion (now only functional)
 #  * More sources in a consistent way
+#  * Use of twitter API (http://code.google.com/p/python-twitter/)
 #  * China searches are highly potential malicious (Baidu...)
 #  * Extract shortened urls and expand them
 #  * Do something with google safe-browsing
@@ -56,6 +57,8 @@ import threading
 from time import sleep, ctime
 #Thanks to Peteris Krumins for give permission and authored this great library
 from xgoogle.search import GoogleSearch, SearchError
+#Get it from http://breakingcode.wordpress.com/2010/01/10/having-fun-with-url-shorteners/
+from shorturl import is_short_url, longurl
 
 
 def googledefault(termtosearch):
@@ -333,6 +336,8 @@ def main():
                       help="specify number urls to get with 'option -a' (20,40,60,.. 200). [default 20]")
     options.add_option("-r", "--rank", dest="url",
                       help="show the alexa rank for these url.")
+    options.add_option("-s", "--urlshort", dest="urlshort",
+		      help="show the real URL if this is shortened")
     parser.add_option_group(options)
 
     # Output
@@ -382,7 +387,7 @@ def main():
 	# Be careful with this option. Took about 7 min in my laptop.
     if options.brute:
 	threads = []
-	loops = 6
+	loops = 7
 
 	t = threading.Thread(target=alexa, args=("ES", 200))
 	threads.append(t)
@@ -395,6 +400,8 @@ def main():
 	t = threading.Thread(target=urls_hot_twitter, args=())
 	threads.append(t)
 	t = threading.Thread(target=urls_malwaredomains(), args=())
+	threads.append(t)
+	t = threading.Thread(target=urls_malwaredomainlist(), args=())
 	threads.append(t)
 
 	for i in range(loops):
@@ -424,8 +431,17 @@ def main():
     if options.twitthoturls:
 	av = urls_hot_twitter()
 	print av
+ 
+    if options.urlshort:
+	theurl = options.urlshort
+	if is_short_url(theurl):
+		print "%s Is short URL -> Real %s" %(theurl, longurl(theurl))
+	else:
+		print "%s No es short URL" %theurl
 
     if options.test:
+
+	"""
 	threads = []
 	#loops = ["urls_hot_twitter(),", "urls_google_trends(),", "alexaHOT(),"]
 	loops = 3
@@ -446,6 +462,7 @@ def main():
 
 	for i in range(loops):
 		threads[i].join()
+	"""
 	
 
 
