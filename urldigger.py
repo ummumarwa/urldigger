@@ -44,8 +44,11 @@
 #  * China searches are highly potential malicious (Baidu...)
 #  * Extract shortened urls and expand them
 #  * Do something with google safe-browsing
+#  * URL hijacking and typo squatting options on hot domains
+#  * Interesting paper with hot sources to look for malicious URLs
+#	 http://research.microsoft.com/en-us/um/redmond/projects/strider/honeymonkey/NDSS_2006_HoneyMonkey_Wang_Y_camera-ready.pdf
 #
-# Feedback and improvements are welcome! :-)
+#    Feedback and improvements are welcome! :-)
 #
 
 
