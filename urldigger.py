@@ -130,7 +130,10 @@ def alexa_custom(country, num):
 	# Alexa has been trying to obfuscate their HTML pages to prevent scrapping.
 	# Maybe this code stops to work in a few time.
 	#regex to catch domains in alexa
-	r = '<a  href="/siteinfo/(.*?)"  ><strong>(.*?)</strong>';	
+	#no longer valid
+	#r = '<a  href="/siteinfo/(.*?)"  ><strong>(.*?)</strong>';	
+	#changed with
+	r = '<a href="/siteinfo/(.*?)">(.*?)</a></h2>';	
 
 	if (country == "EN" and num == 1):
 		alexaEN(num)
@@ -156,7 +159,12 @@ def alexa_custom(country, num):
 
 def alexaEN(num):
 	url ="http://www.alexa.com/topsites/global"
-	r = '<a  href="/siteinfo/(.*?)"  ><strong>(.*?)</strong>';	
+	#No longer valid
+	#r = '<a  href="/siteinfo/(.*?)"  ><strong>(.*?)</strong>';	
+	#changed with:
+	r = '<a href="/siteinfo/(.*?)">(.*?)</a></h2>';	
+	
+	
 
 	for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
 		print '%s' % (m[0])
