@@ -61,7 +61,7 @@ from time import sleep, ctime
 #Thanks to Peteris Krumins for give permission and authored this great library
 from xgoogle.search import GoogleSearch, SearchError
 #Get it from http://breakingcode.wordpress.com/2010/01/10/having-fun-with-url-shorteners/
-from shorturl import is_short_url, longurl
+#from shorturl import is_short_url, longurl
 
 
 def googledefault(termtosearch):
@@ -305,6 +305,23 @@ def urls_malwaredomainlist():
 
 	for u in (murls):
 		print u
+
+def spam_detect(url):
+	spam_words = ['viagra', 'cyalis', 'xenical', 'lipitor',
+	 	      'soma', 'lexapro', 'zoloft', 'tramadol',
+		      'prozac', 'kamagra', 'propecia', 'levitra',
+		     ]
+	suspicious = []
+
+	lines = urllib2.urlopen(url).readlines()
+	for line in lines:
+		for w in spam_words:
+			if w in line:
+				if url not in suspicious:
+					suspicious.append(url)
+
+	for s in suspicious:
+		print "Suspicious SPAM --> %s" %url
 	
 
 #############################################################################################
@@ -313,6 +330,7 @@ def main():
     usage = "usage: %prog [options] arg. -h to show HELP"
     parser = optparse.OptionParser(usage)
 
+    #TODO: ordenar opciones
     # Commands
     commands = optparse.OptionGroup(parser, "Commands")
     commands.add_option("-G", "--googhot", action="store_true",
@@ -451,6 +469,8 @@ def main():
 		print "%s No es short URL" %theurl
 
     if options.test:
+	#test with some know url with spam (site:site-with-spam viagra, cialis)
+	spam_detect("http://url-with-spam-inline.com")
 
 	"""
 	threads = []
