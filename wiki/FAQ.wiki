@@ -1,0 +1,9 @@
+#Frequently Answer Questions.
+
+= urldigger FAQ =
+
+*1. Why urldigger project?.*
+Why not?. I am learning python and this project is a practical exercise to test the python language.
+
+*2. Why would you be interested in urldigger?*
+Maybe because you are a security researcher hungry for urls to test against [https://projects.honeynet.org/capture-hpc capture-hpc] for example. Maybe because you are the owner of a website and you would like to know if you have malicious code within it. Or simply because you're curious about trends in Internet.
