@@ -1,0 +1,8 @@
+#Real examples of harmed sites with SPAM and spurious code.
+
+This site will be updated with the tests of urldigger util.
+
+{{{
+Suspicous SPAM!!!-----> http://www.orkestra.deusto.es/
+
+}}}
