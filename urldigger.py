@@ -62,7 +62,8 @@ def googledefault(termtosearch, lookspam):
 	  results = gs.get_results()
 	  if lookspam:
 	      for res in results:
-		  print "Looking for SPAM in........%s" % (res.url.encode('utf8'))
+		  #print "Looking for SPAM in........%s" % (res.url.encode('utf8'))
+                  print '\033[1;34mLooking for SPAM in........%s\033[1;m' % (res.url.encode('utf8'))
 		  spam_detect(res.url.encode('utf8'))
 	  else:
 	      for res in results:
@@ -281,7 +282,7 @@ def urls_malwaredomains():
 			print malurl[0]
 		
 def spam_detect(url):
-	spam_words = ['display:none', 'viagra', 'cyalis', 'xenical', 'lipitor',
+	spam_words = ['viagra', 'cyalis', 'xenical', 'lipitor',
               'lexapro', 'zoloft', 'tramadol',
               'prozac', 'kamagra', 'propecia', 'levitra',
              ]
@@ -302,7 +303,9 @@ def spam_detect(url):
                             spam_url_suspicious.append(url)
 
 	for u in spam_url_suspicious:
-            print "Suspicious SPAM!!!!!! ----> %s" %u
+            #print "Suspicious SPAM!!!!!! ----> %s" %u
+            print '\033[1;41mSuspicous SPAM!!!-----> %s\033[1;m' %u
+            #print '\033[1;31mSuspicious SPAM!!!\033[1;m' %u
 
 def spam_domain(url):
 	googledefault(url, True)
@@ -345,8 +348,8 @@ def main():
                       help="get urls with search term=term from google [default 50].")
     options.add_option("-s", "--spam", dest="spam",
                       help="look for common SPAM words in the URL site.")
-    options.add_option("-Y", "--spamdomain", dest="spamdomain",
-                      help="look for common SPAM words in entire domain.")
+    options.add_option("-Y", "--spamgoogle", dest="spamgoogle",
+                      help="look for common SPAM words in the result google search urls")
     options.add_option("-n", "--num", dest="number", type="int",
                       help="specify number urls to get with 'option -a' (20,40,60,.. 200). [default 20]")
     options.add_option("-r", "--rank", dest="url",
@@ -396,8 +399,8 @@ def main():
     if options.spam:
         spam_detect(options.spam)
 
-    if options.spamdomain:
-	spam_domain(options.spamdomain)
+    if options.spamgoogle:
+	spam_domain(options.spamgoogle)
 
 	# ranking
     if options.url:
