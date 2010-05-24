@@ -36,19 +36,12 @@
 #  http://www.malwaredomains.com/ (added)
 #  http://www.mwsl.org.cn/
 #  http://www.malwareurl.com/
-#  http://www.malwaredomainlist.com/ (added partially)
+#  http://www.malwaredomainlist.com/
 # 
 #  * Clean and optimize code, identantion (now only functional)
 #  * More sources in a consistent way
-#  * Use of twitter API (http://code.google.com/p/python-twitter/)
-#  * China searches are highly potential malicious (Baidu...)
-#  * Extract shortened urls and expand them
-#  * Do something with google safe-browsing
-#  * URL hijacking and typo squatting options on hot domains
-#  * Interesting paper with hot sources to look for malicious URLs
-#	 http://research.microsoft.com/en-us/um/redmond/projects/strider/honeymonkey/NDSS_2006_HoneyMonkey_Wang_Y_camera-ready.pdf
 #
-#    Feedback and improvements are welcome! :-)
+# Feedback and improvements are welcome! :-)
 #
 
 
@@ -60,17 +53,20 @@ import threading
 from time import sleep, ctime
 #Thanks to Peteris Krumins for give permission and authored this great library
 from xgoogle.search import GoogleSearch, SearchError
-#Get it from http://breakingcode.wordpress.com/2010/01/10/having-fun-with-url-shorteners/
-#from shorturl import is_short_url, longurl
 
 
-def googledefault(termtosearch):
+def googledefault(termtosearch, lookspam):
 	try:
 	  gs = GoogleSearch(termtosearch)
 	  gs.results_per_page = 50
 	  results = gs.get_results()
-	  for res in results:
-	    print res.url.encode('utf8')
+	  if lookspam:
+	      for res in results:
+		  print "Looking for SPAM in........%s" % (res.url.encode('utf8'))
+		  spam_detect(res.url.encode('utf8'))
+	  else:
+	      for res in results:
+	          print res.url.encode('utf8')
 	except SearchError, e:
 	  print "Search failed: %s" % e
 
@@ -133,10 +129,7 @@ def alexa_custom(country, num):
 	# Alexa has been trying to obfuscate their HTML pages to prevent scrapping.
 	# Maybe this code stops to work in a few time.
 	#regex to catch domains in alexa
-	#no longer valid
-	#r = '<a  href="/siteinfo/(.*?)"  ><strong>(.*?)</strong>';	
-	#changed with
-	r = '<a href="/siteinfo/(.*?)">(.*?)</a></h2>';	
+	r = '<a  href="/siteinfo/(.*?)"  ><strong>(.*?)</strong>';	
 
 	if (country == "EN" and num == 1):
 		alexaEN(num)
@@ -162,23 +155,23 @@ def alexa_custom(country, num):
 
 def alexaEN(num):
 	url ="http://www.alexa.com/topsites/global"
-	#No longer valid
-	#r = '<a  href="/siteinfo/(.*?)"  ><strong>(.*?)</strong>';	
-	#changed with:
-	r = '<a href="/siteinfo/(.*?)">(.*?)</a></h2>';	
-	
-	
+	r = '<a  href="/siteinfo/(.*?)"  ><strong>(.*?)</strong>';	
 
 	for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
 		print '%s' % (m[0])
 
 
-def alexaHOT():
+def alexaHOT(lookspam):
 	url = "http://www.alexa.com/hoturls"
 	r = "<a class='offsite' href='(.*?)'>";
 
 	for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
-		print '%s' % (m)
+		if lookspam:
+			print "Looking for SPAM in........%s" % (m)
+			spam_detect(m)
+			#print '%s' % (m)
+		else:
+			print '%s' % (m)
 
 
 def get_alexa_rank(url):
@@ -214,7 +207,7 @@ def urls_hot_twitter():
 	nowatch = ['nowplaying','Goodnight'] 
 	twitt = []
 	a = hot_twitter()
-	for w in (a):
+	for i, w in enumerate(a):
 		if w not in nowatch:
 			google(w)
 
@@ -286,43 +279,33 @@ def urls_malwaredomains():
 		for line in lines:
 			malurl = line.split()
 			print malurl[0]
-
-def urls_malwaredomainlist():
-	url = "http://www.malwaredomainlist.com/update.php"
-	murls = []
-
-	lines = urllib2.urlopen(url).readlines()
-	for line in lines:
-		if line.find("<tr bgcolor=") != -1 and line.find("</td><td>-</td><td>") ==-1:
-			#cut line until a </td><td>
-			line = line[line.find("</td><td>"):]
-			#url begins after <td>
-			line = line[line.find("<td>")+4:]
-			#url ends before </t
-			line = line[:line.find("</t")]
-			line = line.replace("<wbr>", "")
-			murls.append(line)
-
-	for u in (murls):
-		print u
-
+		
 def spam_detect(url):
-	spam_words = ['viagra', 'cyalis', 'xenical', 'lipitor',
-	 	      'soma', 'lexapro', 'zoloft', 'tramadol',
-		      'prozac', 'kamagra', 'propecia', 'levitra',
-		     ]
-	suspicious = []
+	spam_words = ['display:none', 'viagra', 'cyalis', 'xenical', 'lipitor',
+              'lexapro', 'zoloft', 'tramadol',
+              'prozac', 'kamagra', 'propecia', 'levitra',
+             ]
 
-	lines = urllib2.urlopen(url).readlines()
-	for line in lines:
-		for w in spam_words:
-			if w in line:
-				if url not in suspicious:
-					suspicious.append(url)
+	spam_url_suspicious = []
 
-	for s in suspicious:
-		print "Suspicious SPAM --> %s" %url
-	
+	try:
+		lines = urllib2.urlopen(url).readlines()
+	except:
+		#print "URL error %s" %e.reason
+		pass
+
+	if 'lines' in locals():
+            for line in lines:
+                for w in spam_words:
+                    if w in line:
+                        if url not in spam_url_suspicious:
+                            spam_url_suspicious.append(url)
+
+	for u in spam_url_suspicious:
+            print "Suspicious SPAM!!!!!! ----> %s" %u
+
+def spam_domain(url):
+	googledefault(url, True)
 
 #############################################################################################
 	
@@ -330,15 +313,12 @@ def main():
     usage = "usage: %prog [options] arg. -h to show HELP"
     parser = optparse.OptionParser(usage)
 
-    #TODO: ordenar opciones
     # Commands
     commands = optparse.OptionGroup(parser, "Commands")
     commands.add_option("-G", "--googhot", action="store_true",
 			help="show hot searchs from google. [default 20].")
     commands.add_option("-H", "--hot", action="store_true",
 			help="get hot urls from alexa. [default 20].")
-    commands.add_option("-d", "--malwaredomainlist", action="store_true",
-			help="show malicious urls from malwaredomainlist.com page.")
     commands.add_option("-m", "--malwaredomains", action="store_true",
 			help="show malicious urls from malwaredomains.com page.")
     commands.add_option("-T", "--twitter", action="store_true",
@@ -347,11 +327,13 @@ def main():
                       help="get urls from google trends. Use with caution due to it return thoushands of urls.")
     commands.add_option("-W", "--twitthoturls", action="store_true",
                       help="get urls from twitter hot words. Use with caution due to it return thoushands of urls.")
+    commands.add_option("-X", "--alexaspam", action="store_true",
+                      help="look for common SPAM words in the alexa top URLs.")
     commands.add_option("-u", "--ulimit", action="store_true",
                       help="no limit in the number of search url gets from google with '-g option'.")
     commands.add_option("-b", "--brute", action="store_true",
                       help="show the max url numbers from all options availables.")
-    commands.add_option("-x", "--test", action="store_true",
+    commands.add_option("-t", "--test", action="store_true",
                       help="only for internal tests. Do not use")
     parser.add_option_group(commands)
 
@@ -361,12 +343,14 @@ def main():
 			help="get urls from alexa top sites with selected country (EN, ES) [default 20].")
     options.add_option("-g", "--goog", dest="term",
                       help="get urls with search term=term from google [default 50].")
+    options.add_option("-s", "--spam", dest="spam",
+                      help="look for common SPAM words in the URL site.")
+    options.add_option("-Y", "--spamdomain", dest="spamdomain",
+                      help="look for common SPAM words in entire domain.")
     options.add_option("-n", "--num", dest="number", type="int",
                       help="specify number urls to get with 'option -a' (20,40,60,.. 200). [default 20]")
     options.add_option("-r", "--rank", dest="url",
                       help="show the alexa rank for these url.")
-    options.add_option("-s", "--urlshort", dest="urlshort",
-		      help="show the real URL if this is shortened")
     parser.add_option_group(options)
 
     # Output
@@ -401,12 +385,19 @@ def main():
 	else: print 'country option: \'%s\' not valid' %options.country
 
     if options.hot:
-	alexaHOT()
+	lookspam = False
+	alexaHOT(lookspam)
 
     if options.term:
 	if options.ulimit:
 		google(options.term)
-	else: googledefault(options.term)
+	else: googledefault(options.term, False)
+
+    if options.spam:
+        spam_detect(options.spam)
+
+    if options.spamdomain:
+	spam_domain(options.spamdomain)
 
 	# ranking
     if options.url:
@@ -416,7 +407,7 @@ def main():
 	# Be careful with this option. Took about 7 min in my laptop.
     if options.brute:
 	threads = []
-	loops = 7
+	loops = 5
 
 	t = threading.Thread(target=alexa, args=("ES", 200))
 	threads.append(t)
@@ -428,10 +419,8 @@ def main():
 	threads.append(t)
 	t = threading.Thread(target=urls_hot_twitter, args=())
 	threads.append(t)
-	t = threading.Thread(target=urls_malwaredomains(), args=())
-	threads.append(t)
-	t = threading.Thread(target=urls_malwaredomainlist(), args=())
-	threads.append(t)
+	#t = threading.Thread(target=urls_malwaredomains(), args=())
+	#threads.append(t)
 
 	for i in range(loops):
 		threads[i].start()
@@ -450,52 +439,23 @@ def main():
 
     if options.googhoturls:
 	urls_google_trends()
+	#print "Function disabled due to changes in URL trends html. New improvements in next version."
 
     if options.malwaredomains:
-	urls_malwaredomains()
-
-    if options.malwaredomainlist:
-	urls_malwaredomainlist()
+	#urls_malwaredomains()
+	print "Function disabled due to URL scrapping changes. New improvements in next version."
 
     if options.twitthoturls:
 	av = urls_hot_twitter()
 	print av
- 
-    if options.urlshort:
-	theurl = options.urlshort
-	if is_short_url(theurl):
-		print "%s Is short URL -> Real %s" %(theurl, longurl(theurl))
-	else:
-		print "%s No es short URL" %theurl
+
+    if options.alexaspam:
+	lookspam = True
+	alexaHOT(lookspam)
 
     if options.test:
-	#test with some know url with spam (site:site-with-spam viagra, cialis)
-	spam_detect("http://url-with-spam-inline.com")
-
-	"""
-	threads = []
-	#loops = ["urls_hot_twitter(),", "urls_google_trends(),", "alexaHOT(),"]
-	loops = 3
-	#for f in loops:
-		#t = threading.Thread(target=f, args())
-		#threads.append(t)
-		#print f
-
-	t = threading.Thread(target=alexaHOT, args=())
-	threads.append(t)
-	t = threading.Thread(target=urls_google_trends, args=())
-	threads.append(t)
-	t = threading.Thread(target=urls_hot_twitter, args=())
-	threads.append(t)
-
-	for i in range(loops):
-		threads[i].start()
-
-	for i in range(loops):
-		threads[i].join()
-	"""
-	
-
+	av = urls_hot_twitter()
+	print av
 
 
 
