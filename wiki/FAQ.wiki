@@ -19,4 +19,4 @@ site:yoursite.com viagra
 you are searching for viagra term in your site but you'll have to analyze visually the results in order to get the desire result. Instead with urldigger you'll be warned with SPECIFIC test and the domain involved all in a line clearly formatted.
 
 *5. What kind of sites are harmed with SPAM or spurious code?*
-Mainly universities sites but as well blog of famous people, digital newspapers and more and more. Take a look to some real examples.
+Mainly universities sites but as well blog of famous people, digital newspapers and more and more. Take a look to some [http://code.google.com/p/urldigger/wiki/RealExamples real examples.]
