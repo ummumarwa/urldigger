@@ -62,7 +62,6 @@ def googledefault(termtosearch, lookspam):
 	  results = gs.get_results()
 	  if lookspam:
 	      for res in results:
-		  #print "Looking for SPAM in........%s" % (res.url.encode('utf8'))
                   print '\033[1;34mLooking for SPAM in........%s\033[1;m' % (res.url.encode('utf8'))
 		  spam_detect(res.url.encode('utf8'))
 	  else:
@@ -168,9 +167,8 @@ def alexaHOT(lookspam):
 
 	for x, m in enumerate(re.findall(r, urllib2.urlopen(url).read())):
 		if lookspam:
-			print "Looking for SPAM in........%s" % (m)
+                        print '\033[1;34mLooking for SPAM in........%s\033[1;m' % (m)
 			spam_detect(m)
-			#print '%s' % (m)
 		else:
 			print '%s' % (m)
 
@@ -303,9 +301,14 @@ def spam_detect(url):
                             spam_url_suspicious.append(url)
 
 	for u in spam_url_suspicious:
-            #print "Suspicious SPAM!!!!!! ----> %s" %u
             print '\033[1;41mSuspicous SPAM!!!-----> %s\033[1;m' %u
-            #print '\033[1;31mSuspicious SPAM!!!\033[1;m' %u
+
+#TODO:
+#malicious code examples: 
+# <iframe src="http://xxxxxxxxxx.cn" style="visibility:hidden" />
+# iframe + visibility:hidden
+#
+#
 
 def spam_domain(url):
 	googledefault(url, True)
