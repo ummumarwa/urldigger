@@ -4,5 +4,8 @@ This site will be updated with the tests of urldigger util.
 
 {{{
 Suspicous SPAM!!!-----> http://www.orkestra.deusto.es/
-
+Suspicous SPAM!!!-----> http://publicaciones.uclm.es/
 }}}
+
+
+_If you are using urldigger and found some sites harmed with SPAM or spurious code, please give me a shot._
