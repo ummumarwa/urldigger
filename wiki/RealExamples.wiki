@@ -5,6 +5,7 @@ This site will be updated with the tests of urldigger util.
 {{{
 Suspicous SPAM!!!-----> http://www.orkestra.deusto.es/
 Suspicous SPAM!!!-----> http://publicaciones.uclm.es/
+Suspicous SPAM!!!-----> http://blogs.elpais.es/elenigma/
 }}}
 
 
