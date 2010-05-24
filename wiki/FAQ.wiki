@@ -9,7 +9,7 @@ Why not?. I am learning python and this project is a practical exercise to test 
 Maybe because you are a security researcher hungry for urls to test against [https://projects.honeynet.org/capture-hpc capture-hpc] for example. Maybe because you are the owner of a website and you would like to know if you have malicious code within it. Or simply because you're curious about trends in Internet.
 
 *3. How can I know if my site has SPAM or spurious code?*
-In a main view you cannot be aware of spurious code in your site. Normally the spurious code is only visible in the html code directly but not you cannot detect it by only visiting the website. Urldigger read ALL the html code of your site, this include the spurious code you are not aware from a web user perspective.
+In a main view you cannot be aware of spurious code in your site. Normally the spurious code is only visible in the html code directly but you cannot detect it by only visiting the website. Urldigger read ALL the html code of your site, this include the spurious code you are not aware from a web user perspective.
 
 *4. But I can achieve the same directly with google*
 Yes, with a google search like:
