@@ -18,8 +18,8 @@ site:yoursite.com viagra
 }}}
 you are searching for viagra term in your site but you'll have to analyze visually the results in order to get the desire result. Instead with urldigger you'll be warned with SPECIFIC test and the domain involved all in a line clearly formatted.
 
-*5. Pero ya existen diversos servicios similares*
-Sí, [http://blog.s21sec.com/2010/03/servicios-y-herramientas-de-analisis-de.html y aquí tienes una lista de ellos], pero todos ellos únicamente te permiten testear una URL a la vez, el objetivo de urldigger es testear dominios y URLs de tendencias actuales.
+*5. But there are several similar services*
+Of course, [http://blog.s21sec.com/2010/03/servicios-y-herramientas-de-analisis-de.html and here you have a list of them], but all of them only can test one URL at a time, the urldigger main objective is to test full domains and URLs from current trends and hot sources.
 
 *6. What kind of sites are harmed with SPAM or spurious code?*
 Mainly universities sites but as well blog of famous people, digital newspapers and more and more. Take a look to some [http://code.google.com/p/urldigger/wiki/RealExamples real examples.]
