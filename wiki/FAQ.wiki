@@ -23,3 +23,6 @@ Of course, [http://blog.s21sec.com/2010/03/servicios-y-herramientas-de-analisis-
 
 *6. What kind of sites are harmed with SPAM or spurious code?:*
 Mainly universities sites but as well blog of famous people, digital newspapers and more and more. Take a look to some [http://code.google.com/p/urldigger/wiki/RealExamples real examples.]
+
+*7. OK, I have tested my domain and I have found some "suspicious SPAM" messages. What can I do?*
+Well, you can review manually your site in order to check strange code in it. If this is the case you'll have to remove it and change the ftp or blogging platform passwords. For any related question you can [http://ecasbas.blogspot.com/ contact with me].
