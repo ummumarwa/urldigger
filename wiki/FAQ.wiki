@@ -16,7 +16,7 @@ Yes, with a google search like:
 {{{
 site:yoursite.com viagra
 }}}
-you are searching for viagra term in your site but you'll have to analyze visually the results in order to get the desire result. Instead with urldigger you'll be warned with SPECIFIC test and the domain involved all in a line clearly formatted.
+you are searching for viagra term in your site. But the google search results don't represent your current site state, the google's index is usually a few minutes to a couple of weeks old and you'll have to analyze manually the results in order to get the desire result. In contrast with urldigger you will be scanning your current site and you'll be warned with SPECIFIC text and the domain involved all in a line clearly formatted so you can easily found suspicious code in your site.
 
 *5. But there are several similar services:*
 Of course, [http://blog.s21sec.com/2010/03/servicios-y-herramientas-de-analisis-de.html and here you have a list of them], but all of them only can test one URL at a time, the urldigger main objective is to test full domains and URLs from current trends and hot sources.
