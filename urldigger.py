@@ -283,6 +283,8 @@ def spam_detect(url):
 	spam_words = ['viagra', 'cyalis', 'xenical', 'lipitor',
               'lexapro', 'zoloft', 'tramadol',
               'prozac', 'kamagra', 'propecia', 'levitra',
+	      'cheap vista for students', 'Generic Pill', 'Secret to increase'
+	      'mexican pharmacy phentermine', 'Invia Nasal Viagra'
              ]
 
 	spam_url_suspicious = []
