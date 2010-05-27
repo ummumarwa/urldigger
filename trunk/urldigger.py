@@ -86,6 +86,7 @@ def google(termtosearch, lookspam):
                 print '\033[1;34mLooking for SPAM in........%s\033[1;m' % (res.url.encode('utf8'))
 		spam_detect(res.url.encode('utf8'))
 	  else:
+	      for res in results:
 	        print res.url.encode('utf8')
 	except SearchError, e:
 	      print "Search failed: %s" % e	
@@ -308,7 +309,7 @@ def spam_detect(url):
                             spam_url_suspicious.append(url)
 
 	for u in spam_url_suspicious:
-            print '\033[1;41mSuspicous SPAM!!!-----> %s\033[1;m' %u
+            print '\033[1;41mSuspicious SPAM!!!-----> %s\033[1;m' %u
 
 #TODO:
 #malicious code examples: 
