@@ -71,7 +71,7 @@ def googledefault(termtosearch, lookspam):
 	  print "Search failed: %s" % e
 
 
-def google(termtosearch):
+def google(termtosearch, lookspam):
 	try:
 	  gs = GoogleSearch(termtosearch)
 	  gs.results_per_page = 100
@@ -81,10 +81,14 @@ def google(termtosearch):
 	    if not tmp:
 	      break
 	    results.extend(tmp)
-	  for res in results:
-	    print res.url.encode('utf8')
+          if lookspam:
+	      for res in results:
+                print '\033[1;34mLooking for SPAM in........%s\033[1;m' % (res.url.encode('utf8'))
+		spam_detect(res.url.encode('utf8'))
+	  else:
+	        print res.url.encode('utf8')
 	except SearchError, e:
-	  print "Search failed: %s" % e	
+	      print "Search failed: %s" % e	
 
 
 def alexa(country, n):
@@ -208,7 +212,7 @@ def urls_hot_twitter():
 	a = hot_twitter()
 	for i, w in enumerate(a):
 		if w not in nowatch:
-			google(w)
+			google(w, False)
 
 
 def google_trends():
@@ -251,7 +255,7 @@ def google_trends():
 def urls_google_trends():
 	a = google_trends()
 	for i,w in enumerate(a):
-		google(w)
+		google(w, False)
 
 
 def urls_malwaredomains():
@@ -285,6 +289,7 @@ def spam_detect(url):
               'prozac', 'kamagra', 'propecia', 'levitra',
 	      'cheap vista for students', 'Generic Pill', 'Secret to increase'
 	      'mexican pharmacy phentermine', 'Invia Nasal Viagra'
+	      'iframe width="1" height="1"' 
              ]
 
 	spam_url_suspicious = []
@@ -313,7 +318,8 @@ def spam_detect(url):
 #
 
 def spam_domain(url):
-	googledefault(url, True)
+	#googledefault(url, True)
+	google(url, True)
 
 #############################################################################################
 	
@@ -398,7 +404,7 @@ def main():
 
     if options.term:
 	if options.ulimit:
-		google(options.term)
+		google(options.term, False)
 	else: googledefault(options.term, False)
 
     if options.spam:
