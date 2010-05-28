@@ -1,4 +1,4 @@
-#Recopilation of papers and stuff interesting to improve urldigger.
+#stuff interesting to improve urldigger (Blackhat SEO, drive-by, malicious javascript...).
 
 = Papers and documentation related to urldigger objectives =
 
