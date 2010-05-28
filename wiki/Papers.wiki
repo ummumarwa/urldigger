@@ -2,4 +2,4 @@
 
 = Papers and documentation related to urldigger objectives =
 
-[Sophps SEO insights http://www.sophos.com/sophos/docs/eng/papers/sophos-seo-insights.pdf]
+[http://www.sophos.com/sophos/docs/eng/papers/sophos-seo-insights.pdf Sophos SEO insights]
