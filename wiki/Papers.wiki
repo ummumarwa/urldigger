@@ -2,6 +2,7 @@
 
 = Papers and documentation related to urldigger objectives =
 
+[http://www.caro2010.org/popup_buescher.html Detecting malicious web pages with MonkeyWrench] (Paper available privately)
 [http://www.sophos.com/sophos/docs/eng/papers/sophos-seo-insights.pdf Sophos SEO insights]
 
 [http://www.sersc.org/journals/IJSIA/vol4_no2_2010/2.pdf Automatic Detection for JavaScript Obfuscation Attacks in Web Pages through String Pattern Analysis] *(interesting to implement)*
