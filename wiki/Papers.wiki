@@ -1,0 +1,5 @@
+#Recopilation of papers and stuff interesting to improve urldigger.
+
+= Papers and documentation related to urldigger objectives =
+
+[Sophps SEO insights http://www.sophos.com/sophos/docs/eng/papers/sophos-seo-insights.pdf]
