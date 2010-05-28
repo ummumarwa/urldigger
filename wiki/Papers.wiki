@@ -3,3 +3,7 @@
 = Papers and documentation related to urldigger objectives =
 
 [http://www.sophos.com/sophos/docs/eng/papers/sophos-seo-insights.pdf Sophos SEO insights]
+
+[http://research.google.com/archive/provos-2008a.pdf All your Iframes point to US (Provost at Google]
+
+[http://research.microsoft.com/en-us/um/redmond/projects/strider/honeymonkey/NDSS_2006_HoneyMonkey_Wang_Y_camera-ready.pdf Finding Web Sites That Exploit Browser Vulnerabilities (Microsoft Researc)]
