@@ -3,15 +3,17 @@
 This site will be updated with the tests of urldigger util.
 
 {{{
-Suspicous SPAM!!!-----> http://www.orkestra.deusto.es/
-Suspicous SPAM!!!-----> http://publicaciones.uclm.es/
-Suspicous SPAM!!!-----> http://blogs.elpais.es/elenigma/
-Suspicous SPAM!!!-----> http://blogs.elpais.es/elecciones_catalanas/2006/11/cementerios.html
-Suspicous SPAM!!!-----> http://www.ain.es/images/Servicio/actdoc_56.pdf
+Suspicious SPAM!!!-----> http://www.orkestra.deusto.es/
+Suspicious SPAM!!!-----> http://publicaciones.uclm.es/
+Suspicious SPAM!!!-----> http://blogs.elpais.es/elenigma/
+Suspicious SPAM!!!-----> http://blogs.elpais.es/elecciones_catalanas/2006/11/cementerios.html
+Suspicious SPAM!!!-----> http://www.ain.es/images/Servicio/actdoc_56.pdf
 (yes, spam in metadata: metadata spam)
-Suspicous SPAM!!!-----> http://politicalblog.abc13.com/
-Suspicous SPAM!!!-----> http://cadeedu.es/
+Suspicious SPAM!!!-----> http://politicalblog.abc13.com/
+Suspicious SPAM!!!-----> http://cadeedu.es/
+Suspicious SPAM!!!-----> http://www.debatecallejero.com/?p=2181
 }}}
 
+*All sites listed here were warned about this issue.*
 
 _If you are using urldigger and found some sites harmed with SPAM or spurious code, please give me a shot._
