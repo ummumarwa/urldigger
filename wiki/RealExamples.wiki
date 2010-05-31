@@ -19,5 +19,5 @@ Suspicious SPAM!!!-----> http://www.ucatolica.ac.cr
 
 _If you are using urldigger and found some sites harmed with SPAM or spurious code, please give me a shot._
 
-"Interesting searches with the -Y option"
+"Interesting searches with the -Y option":
 *online education*
