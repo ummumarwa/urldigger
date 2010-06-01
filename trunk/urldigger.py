@@ -311,6 +311,33 @@ def spam_detect(url):
 	for u in spam_url_suspicious:
             print '\033[1;41mSuspicious SPAM!!!-----> %s\033[1;m' %u
 
+
+def phishing_detect(url):
+	#fill in with all phished sites detected in SPAM folder
+	phished_sites_strings = [ 'www.bbva.es',
+							  'www.cajamar.es'
+					        ]
+
+	phishing_url_suspicious = []
+
+	try:
+		lines = urllib2.urlopen(url).readlines()
+	except:
+		pass
+
+	if 'lines' in locals():
+		for line in lines:
+			for p in phished_sites_strings:
+				if p in line and p not in url:
+					if url not in phishing_url_suspicious:
+						phishing_url_suspicious.append(url)
+
+	for u in phishing_url_suspicious:
+            print '\033[1;41mSuspicious PHISHING!!!-----> %s\033[1;m' %u
+
+		
+
+	
 #TODO:
 #malicious code examples: 
 # <iframe src="http://xxxxxxxxxx.cn" style="visibility:hidden" />
@@ -322,6 +349,10 @@ def spam_domain(url):
 	#googledefault(url, True)
 	google(url, True)
 
+#look for phishing pages in a URLs from the google search
+def phishing_google(url):
+	google(url, True)
+
 #############################################################################################
 	
 def main():
@@ -331,31 +362,35 @@ def main():
     # Commands
     commands = optparse.OptionGroup(parser, "Commands")
     commands.add_option("-G", "--googhot", action="store_true",
-			help="show hot searchs from google. [default 20].")
+					    help="show hot searchs from google. [default 20].")
     commands.add_option("-H", "--hot", action="store_true",
-			help="get hot urls from alexa. [default 20].")
+						help="get hot urls from alexa. [default 20].")
     commands.add_option("-m", "--malwaredomains", action="store_true",
-			help="show malicious urls from malwaredomains.com page.")
+						help="show malicious urls from malwaredomains.com page.")
     commands.add_option("-T", "--twitter", action="store_true",
-			help="show hot topics from twitter main page.")
+						help="show hot topics from twitter main page.")
     commands.add_option("-U", "--googhoturls", action="store_true",
-                      help="get urls from google trends. Use with caution due to it return thoushands of urls.")
+            			help="get urls from google trends. Use with caution due to it return thoushands of urls.")
     commands.add_option("-W", "--twitthoturls", action="store_true",
-                      help="get urls from twitter hot words. Use with caution due to it return thoushands of urls.")
+            			help="get urls from twitter hot words. Use with caution due to it return thoushands of urls.")
     commands.add_option("-X", "--alexaspam", action="store_true",
-                      help="look for common SPAM words in the alexa top URLs.")
+            			help="look for common SPAM words in the alexa top URLs.")
     commands.add_option("-u", "--ulimit", action="store_true",
-                      help="no limit in the number of search url gets from google with '-g option'.")
+            			help="no limit in the number of search url gets from google with '-g option'.")
     commands.add_option("-b", "--brute", action="store_true",
-                      help="show the max url numbers from all options availables.")
+            			help="show the max url numbers from all options availables.")
     commands.add_option("-t", "--test", action="store_true",
-                      help="only for internal tests. Do not use")
+            			help="only for internal tests. Do not use")
     parser.add_option_group(commands)
 
     # Options
     options = optparse.OptionGroup(parser, "Options")
     options.add_option("-a", "--alexa", dest="country", 
-			help="get urls from alexa top sites with selected country (EN, ES) [default 20].")
+				   	  help="get urls from alexa top sites with selected country (EN, ES) [default 20].")
+    options.add_option("-p", "--phishing", dest="phishing",
+          			  help="look if the site checked is a phished site.")
+    options.add_option("-P", "--phishingsearch", dest="phishingsearch",
+          			  help="look for phished sites in the result google search urls.")
     options.add_option("-g", "--goog", dest="term",
                       help="get urls with search term=term from google [default 50].")
     options.add_option("-s", "--spam", dest="spam",
@@ -412,7 +447,13 @@ def main():
         spam_detect(options.spam)
 
     if options.spamgoogle:
-	spam_domain(options.spamgoogle)
+		spam_domain(options.spamgoogle)
+
+    if options.phishing:
+		phishing_detect(options.phishing)
+
+    if options.phishingsearch:
+		phishing_google(options.phishingsearch)
 
 	# ranking
     if options.url:
