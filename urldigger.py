@@ -71,26 +71,36 @@ def googledefault(termtosearch, lookspam):
 	  print "Search failed: %s" % e
 
 
-def google(termtosearch, lookspam):
-	try:
-	  gs = GoogleSearch(termtosearch)
-	  gs.results_per_page = 100
-	  results = []
-	  while True:
-	    tmp = gs.get_results()
-	    if not tmp:
-	      break
-	    results.extend(tmp)
-          if lookspam:
-	      for res in results:
-                print '\033[1;34mLooking for SPAM in........%s\033[1;m' % (res.url.encode('utf8'))
-		spam_detect(res.url.encode('utf8'))
-	  else:
-	      for res in results:
-	        print res.url.encode('utf8')
-	except SearchError, e:
-	      print "Search failed: %s" % e	
+def google(termtosearch, action):
+	
+	#action = spam or phis
 
+	try:
+		gs = GoogleSearch(termtosearch)
+		gs.results_per_page = 100
+		results = []
+
+		while True:
+			tmp = gs.get_results()
+			if not tmp:
+				break
+			results.extend(tmp)
+
+			if action == 'spam':
+				for res in results:
+					print '\033[1;34mLooking for SPAM in ......%s\033[1;m' % (res.url.encode('utf8'))
+					spam_detect(res.url.encode('utf8'))
+			elif action == 'phis':
+				for res in results:
+					print '\033[1;34mLooking for PHISHING in ......%s\033[1;m' % (res.url.encode('utf8'))
+					phishing_detect(res.url.encode('utf8'))
+					
+			else:
+					for res in results:
+						print res.url.encode('utf8')
+
+	except SearchError, e:
+		print "Search failed: %s" % e
 
 def alexa(country, n):
 	if country in ('ES', 'EN'):
@@ -286,11 +296,11 @@ def urls_malwaredomains():
 		
 def spam_detect(url):
 	spam_words = ['viagra', 'cyalis', 'xenical', 'lipitor',
-              'lexapro', 'zoloft', 'tramadol',
-              'prozac', 'kamagra', 'propecia', 'levitra',
-	      'cheap vista for students', 'Generic Pill', 'Secret to increase'
-	      'mexican pharmacy phentermine', 'Invia Nasal Viagra'
-	      'iframe width="1" height="1"' 
+              	'lexapro', 'zoloft', 'tramadol',
+              	'prozac', 'kamagra', 'propecia', 'levitra',
+	      		'cheap vista for students', 'Generic Pill', 'Secret to increase'
+	      		'mexican pharmacy phentermine', 'Invia Nasal Viagra'
+	      		'iframe width="1" height="1"' 
              ]
 
 	spam_url_suspicious = []
@@ -347,11 +357,11 @@ def phishing_detect(url):
 
 def spam_domain(url):
 	#googledefault(url, True)
-	google(url, True)
+	google(url, 'spam')
 
 #look for phishing pages in a URLs from the google search
 def phishing_google(url):
-	google(url, True)
+	google(url, 'phis')
 
 #############################################################################################
 	
