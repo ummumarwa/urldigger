@@ -15,6 +15,7 @@
 [http://pi1.informatik.uni-mannheim.de/filepool/publications/monkey-spider.pdf Monkey-Spider: Detecting Malicious Websites with Low-Interaction Honeyclients]
 
 
+
 *To investigate:*
 [http://code.google.com/p/phoneyc/ honeyclient is designed to give insights into malicious web sites]
 
