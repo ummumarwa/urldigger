@@ -13,3 +13,8 @@
 [http://research.microsoft.com/en-us/um/redmond/projects/strider/honeymonkey/NDSS_2006_HoneyMonkey_Wang_Y_camera-ready.pdf Finding Web Sites That Exploit Browser Vulnerabilities] (Microsoft Research)
 
 [http://pi1.informatik.uni-mannheim.de/filepool/publications/monkey-spider.pdf Monkey-Spider: Detecting Malicious Websites with Low-Interaction Honeyclients]
+
+
+*To investigate:*
+[http://code.google.com/p/phoneyc/ honeyclient is designed to give insights into malicious web sites]
+[http://code.google.com/p/jsunpack-n/ Emulate browser functionality when visiting a URL]
