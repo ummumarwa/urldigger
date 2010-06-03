@@ -296,10 +296,11 @@ def urls_malwaredomains():
 		
 def spam_detect(url):
 	spam_words = ['viagra', 'cyalis', 'xenical', 'lipitor',
-              	'lexapro', 'zoloft', 'tramadol',
+              	'lexapro', 'zoloft', 'tramadol', 'amoxicillin'
               	'prozac', 'kamagra', 'propecia', 'levitra',
-	      		'cheap vista for students', 'Generic Pill', 'Secret to increase'
-	      		'mexican pharmacy phentermine', 'Invia Nasal Viagra'
+	      		'cheap vista for students', 'Generic Pill', 'Secret to increase', 'cheap price'
+	      		'mexican pharmacy phentermine', 'Invia Nasal Viagra', 'buy generic', 'no prescription'
+				'buy discount', 'order cheap', 'buy cheap', 'without prescription', 
 	      		'iframe width="1" height="1"' 
              ]
 
