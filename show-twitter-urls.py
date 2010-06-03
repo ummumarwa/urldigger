@@ -37,7 +37,7 @@ def spam_detect(url):
   						#fobj.close()
 
     for u in spam_url_suspicious:
-        print '\033[1;41mSuspicious SPAM!!!-----> %s \033[1;m' %(u, spam_word_suspicious)
+        print '\033[1;41mSuspicious SPAM!!!-----> %s ( %s )\033[1;m' %(u, spam_word_suspicious)
 
 
 def phishing_detect(url):
