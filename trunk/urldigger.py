@@ -304,6 +304,7 @@ def spam_detect(url):
              ]
 
 	spam_url_suspicious = []
+	spam_word_suspicious = []
 
 	try:
 		lines = urllib2.urlopen(url).readlines()
@@ -317,9 +318,10 @@ def spam_detect(url):
                     if w in line:
                         if url not in spam_url_suspicious:
                             spam_url_suspicious.append(url)
-
+                            spam_word_suspicious.append(w)
+						
 	for u in spam_url_suspicious:
-            print '\033[1;41mSuspicious SPAM!!!-----> %s\033[1;m' %u
+		print '\033[1;41mSuspicious SPAM!!!-----> %s ( %s )\033[1;m' %(u, spam_word_suspicious)
 
 
 def phishing_detect(url):
@@ -329,6 +331,7 @@ def phishing_detect(url):
 					        ]
 
 	phishing_url_suspicious = []
+	phishing_site_suspicious = []
 
 	try:
 		lines = urllib2.urlopen(url).readlines()
@@ -341,9 +344,10 @@ def phishing_detect(url):
 				if p in line and p not in url:
 					if url not in phishing_url_suspicious:
 						phishing_url_suspicious.append(url)
+						phishing_site_suspicious.append(p)
 
 	for u in phishing_url_suspicious:
-            print '\033[1;41mSuspicious PHISHING!!!-----> %s\033[1;m' %u
+            print '\033[1;41mSuspicious PHISHING!!!-----> %s ( %s )\033[1;m' %(u, phishing_site_suspicious[0])
 
 		
 
@@ -397,12 +401,12 @@ def main():
     options = optparse.OptionGroup(parser, "Options")
     options.add_option("-a", "--alexa", dest="country", 
 				   	  help="get urls from alexa top sites with selected country (EN, ES) [default 20].")
+    options.add_option("-g", "--goog", dest="term",
+                      help="get urls with search term=term from google [default 50].")
     options.add_option("-p", "--phishing", dest="phishing",
           			  help="look if the site checked is a phished site.")
     options.add_option("-P", "--phishingsearch", dest="phishingsearch",
           			  help="look for phished sites in the result google search urls.")
-    options.add_option("-g", "--goog", dest="term",
-                      help="get urls with search term=term from google [default 50].")
     options.add_option("-s", "--spam", dest="spam",
                       help="look for common SPAM words in the URL site.")
     options.add_option("-Y", "--spamgoogle", dest="spamgoogle",
