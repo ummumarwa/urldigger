@@ -38,6 +38,29 @@ def spam_detect(url):
         print '\033[1;41mSuspicious SPAM!!!-----> %s \033[1;m' %(u)
 
 
+def phishing_detect(url):
+        #fill in with all phished sites detected in SPAM folder
+        phished_sites_strings = [ 'www.bbva.es',
+                                  'www.cajamar.es'
+                                ]
+
+        phishing_url_suspicious = []
+
+        try:
+                lines = urllib2.urlopen(url).readlines()
+        except:
+                pass
+
+        if 'lines' in locals():
+                for line in lines:
+                        for p in phished_sites_strings:
+                                if p in line and p not in url:
+                                        if url not in phishing_url_suspicious:
+                                                phishing_url_suspicious.append(url)
+
+        for u in phishing_url_suspicious:
+            print '\033[1;41mSuspicious PHISHING!!!-----> %s\033[1;m' %u
+
 api = twitter.Api()
 
 
@@ -50,6 +73,8 @@ while True:
 		if host != "null":
 			print '\033[1;34mLooking for SPAM in........%s (%s)\033[1;m' % (s.user.url,s.user.screen_name )
 			spam_detect(s.user.url)
+			print '\033[1;34mLooking for PHISHING in........%s (%s)\033[1;m' % (s.user.url,s.user.screen_name )
+			phishing_detect(s.user.url)
 		    #fobj.write ('%s\n' %(s.user.url))
 
 			"""
