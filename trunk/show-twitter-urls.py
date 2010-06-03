@@ -18,6 +18,7 @@ def spam_detect(url):
                  ]
 
     spam_url_suspicious = []
+    spam_word_suspicious = []
 
     try:
         lines = urllib2.urlopen(url).readlines()
@@ -31,11 +32,12 @@ def spam_detect(url):
                 if w in line:
                     if url not in spam_url_suspicious:
                         spam_url_suspicious.append(url)
+                        spam_word_suspicious.append(w)
     				    #fobj.write ('%s\n' %(url))
   						#fobj.close()
 
     for u in spam_url_suspicious:
-        print '\033[1;41mSuspicious SPAM!!!-----> %s \033[1;m' %(u)
+        print '\033[1;41mSuspicious SPAM!!!-----> %s \033[1;m' %(u, spam_word_suspicious)
 
 
 def phishing_detect(url):
