@@ -2,7 +2,8 @@
 
 = Papers and documentation related to urldigger objectives =
 
-[http://www.cs.ucsb.edu/~chris/research/doc/www10_jsand.pdf Detection and Analysis of Drive-by-Download Attacks and Malicious JavaScript code] ***
+[http://www.cs.ucsb.edu/~chris/research/doc/www10_jsand.pdf Detection and Analysis of Drive-by-Download Attacks and Malicious JavaScript code] *(Great report)*
+ 
 [https://docs.google.com/viewer?url=http://seclab.stanford.edu/websec/framebusting/framebust.pdf&pli=1 Clickjacking vulnerabilities in popular sites]
 
 [http://www.caro2010.org/popup_buescher.html Detecting malicious web pages with MonkeyWrench] (Paper available privately)
