@@ -26,3 +26,5 @@ Mainly universities sites but as well blog of famous people, digital newspapers 
 
 *7. OK, I have tested my domain and I have found some "suspicious SPAM" messages. What can I do?*
 Well, you can review manually your site in order to check strange code in it. If this is the case you'll have to remove it and change the ftp or blogging platform passwords. For any related question you can [http://ecasbas.blogspot.com/ contact with me].
+
+http://www.webchicklet.com/tools/monitorhackdfiles-tool-helps-fight-site-hackers/
