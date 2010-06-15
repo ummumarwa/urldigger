@@ -41,6 +41,8 @@ def spam_detect(url):
 
 
 def phishing_detect(url):
+        connection = sqlite3.connect('urldigger.db')
+        cursor = connection.cursor()
         #fill in with all phished sites detected in SPAM folder
         phished_sites_strings = [ 'www.bbva.es',
                                   'www.cajamar.es'
@@ -59,6 +61,9 @@ def phishing_detect(url):
                                 if p in line and p not in url:
                                         if url not in phishing_url_suspicious:
                                                 phishing_url_suspicious.append(url)
+                                                cursor.execute("UPDATE urls set result = 1" + " WHERE url=" + url)
+                                                connection.commit()
+                                                connection.close()
 
         for u in phishing_url_suspicious:
             print '\033[1;41mSuspicious PHISHING!!!-----> %s\033[1;m' %u
@@ -76,9 +81,9 @@ while True:
 			connection = sqlite3.connect('urldigger.db')
 			cursor = connection.cursor()
 			mitime = strftime("%Y-%m-%d %H:%M:%S")
-			for u in [('s.user.url', 's.user.screen', 'mitime'),]:
-				cursor.execute("INSERT INTO urls(url, user, result, timescan) values(?, ?, 0, ?)", u )
-
+			#http://www.wingware.com/psupport/python-manual/3.0/library/sqlite3.html
+			u = (s.user.url, s.user.screen_name, '0', mitime,)
+			cursor.execute("INSERT INTO urls(url, user, result, timescan) values(?, ?, ?, ?)", u)
 			connection.commit()
 			connection.close()
 			print '\033[1;34mLooking for SPAM in........%s (%s)\033[1;m' % (s.user.url,s.user.screen_name )
