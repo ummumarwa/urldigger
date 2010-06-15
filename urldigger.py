@@ -74,7 +74,6 @@ def googledefault(termtosearch, lookspam):
 def google(termtosearch, action):
 	
 	#action = spam or phis
-
 	try:
 		gs = GoogleSearch(termtosearch)
 		gs.results_per_page = 100
@@ -101,6 +100,7 @@ def google(termtosearch, action):
 
 	except SearchError, e:
 		print "Search failed: %s" % e
+
 
 def alexa(country, n):
 	if country in ('ES', 'EN'):
@@ -293,6 +293,7 @@ def urls_malwaredomains():
 		for line in lines:
 			malurl = line.split()
 			print malurl[0]
+
 		
 def spam_detect(url):
 	spam_words = ['viagra', 'cyalis', 'xenical', 'lipitor',
@@ -302,7 +303,7 @@ def spam_detect(url):
 	      		'mexican pharmacy phentermine', 'Invia Nasal Viagra', 'buy generic', 'no prescription'
 				'buy discount', 'order cheap', 'buy cheap', 'without prescription', 
 	      		'iframe width="1" height="1"' 
-             ]
+                ]
 
 	spam_url_suspicious = []
 	spam_word_suspicious = []
@@ -327,8 +328,10 @@ def spam_detect(url):
 
 def phishing_detect(url):
 	#fill in with all phished sites detected in SPAM folder
-	phished_sites_strings = [ 'www.bbva.es',
-							  'www.cajamar.es'
+	phished_sites_strings = [ 'www.bbva.es', 'www.cajamar.es', 'www.bancopopular.es', 'www.bbva.es', 'www.bancopastor.es'
+							  'www.caixasabadell.es', 'www.cajacantabria.com', 'www.cajamadrid.es', 'www.bancasabadell.es'
+							  'www.bancaja.es', 'www.bancomercio.com', 'www.bde.es', 'www.bancogui.es', 'www.bancopastor.es'
+							  'www.bancopopular.es', 'www.banesto.es', 'www.bankinter.es', 'www.caixacat.es' 
 					        ]
 
 	phishing_url_suspicious = []
@@ -371,8 +374,9 @@ def phishing_google(url):
 #############################################################################################
 	
 def main():
-    usage = "usage: %prog [options] arg. -h to show HELP"
+    usage = "usage: %prog [options] arg. -h to show HELP, version=%prog-02b"
     parser = optparse.OptionParser(usage)
+	
 
     # Commands
     commands = optparse.OptionGroup(parser, "Commands")
@@ -410,7 +414,7 @@ def main():
           			  help="look for phished sites in the result google search urls.")
     options.add_option("-s", "--spam", dest="spam",
                       help="look for common SPAM words in the URL site.")
-    options.add_option("-Y", "--spamgoogle", dest="spamgoogle",
+    options.add_option("-S", "--spamgoogle", dest="spamgoogle",
                       help="look for common SPAM words in the result google search urls")
     options.add_option("-n", "--num", dest="number", type="int",
                       help="specify number urls to get with 'option -a' (20,40,60,.. 200). [default 20]")
