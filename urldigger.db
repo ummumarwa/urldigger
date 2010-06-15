@@ -1,0 +1,10 @@
+#sqlite DB for urldigger
+
+#Create DB in command line
+#sqlite3 urldigger.db
+
+CREATE TABLE urls(ukey INTEGER PRIMARY KEY,
+	url TEXT,
+	user TEXT, #only functional for show-twitter-urls function
+	result INTEGER,
+	timescan TEXT);

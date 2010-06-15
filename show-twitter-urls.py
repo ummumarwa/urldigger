@@ -4,6 +4,8 @@ import twitter, time
 import urlparse
 import urllib2
 import os
+import sqlite3
+from time import strftime
 
 #from shorturl import is_short_url, longurl
 def spam_detect(url):
@@ -18,7 +20,6 @@ def spam_detect(url):
                  ]
 
     spam_url_suspicious = []
-    spam_word_suspicious = []
 
     try:
         lines = urllib2.urlopen(url).readlines()
@@ -32,12 +33,11 @@ def spam_detect(url):
                 if w in line:
                     if url not in spam_url_suspicious:
                         spam_url_suspicious.append(url)
-                        spam_word_suspicious.append(w)
     				    #fobj.write ('%s\n' %(url))
   						#fobj.close()
 
     for u in spam_url_suspicious:
-        print '\033[1;41mSuspicious SPAM!!!-----> %s ( %s )\033[1;m' %(u, spam_word_suspicious)
+        print '\033[1;41mSuspicious SPAM!!!-----> %s \033[1;m' %(u)
 
 
 def phishing_detect(url):
@@ -69,10 +69,20 @@ api = twitter.Api()
 while True:
     #fobj = open('/tmp/manual_uris.txt', 'a')
     statuses = api.GetPublicTimeline()
+    #//connection = sqlite3.connect('urldigger.db')
+    #cursor = connection.cursor()
+    #mitime = strftime("%Y-%m-%d %H:%M:%S")
+	#connection = sqlite3.connect('urldigger.db')
     for s in statuses:
             if s.user.url != None:
 		host = urlparse.urlparse(s.user.url)[1]
 		if host != "null":
+			connection = sqlite3.connect('urldigger-pruebas')
+			cursor = connection.cursor()
+			mitime = strftime("%Y-%m-%d %H:%M:%S")
+			cursor.execute("INSERT INTO urls(url, user, result, timescan) values('%s', '%s', 0, '%s')" % (s.user.url, s.user.screen_name, mitime))
+			connection.commit()
+			connection.close()
 			print '\033[1;34mLooking for SPAM in........%s (%s)\033[1;m' % (s.user.url,s.user.screen_name )
 			spam_detect(s.user.url)
 			print '\033[1;34mLooking for PHISHING in........%s (%s)\033[1;m' % (s.user.url,s.user.screen_name )
