@@ -9,6 +9,9 @@ from time import strftime
 
 #from shorturl import is_short_url, longurl
 def spam_detect(url):
+    connection = sqlite3.connect('urldigger.db')
+    cursor = connection.cursor()
+
     fobj = open('/tmp/spam_twitter.txt', 'a')
 
     spam_words = ['viagra', 'cyalis', 'xenical', 'lipitor',
@@ -20,6 +23,7 @@ def spam_detect(url):
                  ]
 
     spam_url_suspicious = []
+    spam_word_suspicious = []
 
     try:
         lines = urllib2.urlopen(url).readlines()
@@ -33,11 +37,15 @@ def spam_detect(url):
                 if w in line:
                     if url not in spam_url_suspicious:
                         spam_url_suspicious.append(url)
-    				    #fobj.write ('%s\n' %(url))
-  						#fobj.close()
+                        spam_word_suspicious.append(w)
+                        u = (url,)
+                        cursor.execute("UPDATE urls set result = 1 WHERE url=?", u)
+                        #cursor.execute("UPDATE urls set result = 1" + " WHERE url=" + url)
+                        connection.commit()
+                        connection.close()
 
     for u in spam_url_suspicious:
-        print '\033[1;41mSuspicious SPAM!!!-----> %s \033[1;m' %(u)
+        print '\033[1;41mSuspicious SPAM!!!-----> %s ( %s ) \033[1;m' %(u, spam_word_suspicious)
 
 
 def phishing_detect(url):
@@ -49,6 +57,7 @@ def phishing_detect(url):
                                 ]
 
         phishing_url_suspicious = []
+        phishing_site_suspicious = []
 
         try:
                 lines = urllib2.urlopen(url).readlines()
@@ -61,12 +70,14 @@ def phishing_detect(url):
                                 if p in line and p not in url:
                                         if url not in phishing_url_suspicious:
                                                 phishing_url_suspicious.append(url)
-                                                cursor.execute("UPDATE urls set result = 1" + " WHERE url=" + url)
+                                                phishing_site_suspicious.append(p)
+                                                u = (url,)
+                                                cursor.execute("UPDATE urls set result = 1 WHERE url=?", u)
                                                 connection.commit()
                                                 connection.close()
 
         for u in phishing_url_suspicious:
-            print '\033[1;41mSuspicious PHISHING!!!-----> %s\033[1;m' %u
+            print '\033[1;41mSuspicious PHISHING!!!-----> %s ( %s )\033[1;m' %(u, phishing_site_suspicious)
 
 api = twitter.Api()
 
