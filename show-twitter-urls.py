@@ -38,8 +38,8 @@ def spam_detect(url):
                     if url not in spam_url_suspicious:
                         spam_url_suspicious.append(url)
                         spam_word_suspicious.append(w)
-                        u = (url,)
-                        cursor.execute("UPDATE urls set result = 1 WHERE url=?", u)
+                        u = (url, w)
+                        cursor.execute("UPDATE urls set (result = 1, suspicious_word = ?)  WHERE url=?", u)
                         #cursor.execute("UPDATE urls set result = 1" + " WHERE url=" + url)
                         connection.commit()
                         connection.close()
@@ -52,8 +52,10 @@ def phishing_detect(url):
         connection = sqlite3.connect('urldigger.db')
         cursor = connection.cursor()
         #fill in with all phished sites detected in SPAM folder
-        phished_sites_strings = [ 'www.bbva.es',
-                                  'www.cajamar.es'
+        phished_sites_strings = [ 'www.bbva.es', 'www.cajamar.es', 'www.bancopopular.es', 'www.bbva.es', 'www.bancopastor.es'
+								'www.caixasabadell.es', 'www.cajacantabria.com', 'www.cajamadrid.es', 'www.bancasabadell.es'
+								'www.bancaja.es', 'www.bancomercio.com', 'www.bde.es', 'www.bancogui.es', 'www.bancopastor.es'
+								'www.bancopopular.es', 'www.banesto.es', 'www.bankinter.es', 'www.caixacat.es' 
                                 ]
 
         phishing_url_suspicious = []
@@ -71,8 +73,8 @@ def phishing_detect(url):
                                         if url not in phishing_url_suspicious:
                                                 phishing_url_suspicious.append(url)
                                                 phishing_site_suspicious.append(p)
-                                                u = (url,)
-                                                cursor.execute("UPDATE urls set result = 1 WHERE url=?", u)
+                                                u = (url,p,)
+                                                cursor.execute("UPDATE urls set (result = 1, suspicious_urlbank = ?) WHERE url=?", u)
                                                 connection.commit()
                                                 connection.close()
 
