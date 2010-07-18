@@ -2,12 +2,61 @@
 
 = Introduction =
 
-Add your content here.
+Some basic usage examples
 
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Show help and all options available. (This output will be different between versions)
+{{{
+ecasbas@cipher:~/proyectos/urldigger$ python urldigger.py -h
+Usage: urldigger.py [options] arg. -h to show HELP, version=urldigger.py-02b
+
+Options:
+  -h, --help            show this help message and exit
+
+  Commands:
+    -G, --googhot       show hot searchs from google. [default 20].
+    -H, --hot           get hot urls from alexa. [default 20].
+    -m, --malwaredomains
+                        show malicious urls from malwaredomains.com page.
+    -T, --twitter       show hot topics from twitter main page.
+    -U, --googhoturls   get urls from google trends. Use with caution due to
+                        it return thoushands of urls.
+    -W, --twitthoturls  get urls from twitter hot words. Use with caution due
+                        to it return thoushands of urls.
+    -X, --alexaspam     look for common SPAM words in the alexa top URLs.
+    -u, --ulimit        no limit in the number of search url gets from google
+                        with '-g option'.
+    -b, --brute         show the max url numbers from all options availables.
+    -t, --test          only for internal tests. Do not use
+
+  Options:
+    -a COUNTRY, --alexa=COUNTRY
+                        get urls from alexa top sites with selected country
+                        (EN, ES) [default 20].
+    -f FILE, --file=FILE
+                        search in urls results from terms in file.
+    -F FILEURL, --fileurl=FILEURL
+                        show urls from search terms of the file.
+    -g TERM, --goog=TERM
+                        get urls with search term=term from google [default
+                        50].
+    -p PHISHING, --phishing=PHISHING
+                        look if the site checked is a phished site.
+    -P PHISHINGSEARCH, --phishingsearch=PHISHINGSEARCH
+                        look for phished sites in the result google search
+                        urls.
+    -s SPAM, --spam=SPAM
+                        look for common SPAM words in the URL site.
+    -S SPAMGOOGLE, --spamgoogle=SPAMGOOGLE
+                        look for common SPAM words in the result google search
+                        urls
+    -n NUMBER, --num=NUMBER
+                        specify number urls to get with 'option -a'
+                        (20,40,60,.. 200). [default 20]
+    -r URL, --rank=URL  show the alexa rank for these url.
+
+  Output:
+    -v, --verbose
+}}}
