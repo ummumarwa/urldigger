@@ -70,7 +70,7 @@ ecasbas@cipher:~/proyectos/urldigger$ python urldigger.py -G
 
 ==Get hot urls from alexa==
 {{{
-ecasbas@cipher:~/proyectos/urldigger-2/urldigger-03$ python urldigger.py -H
+ecasbas@cipher:~/proyectos/urldigger$ python urldigger.py -H
 http://news.yahoo.com/s/yblog_upshot/20100718/el_yblog_upshot/tea-party-group-expels-leader-for-clearly-offensive-blog-post
 http://movies.yahoo.com/news/movies.ap.org/inception-earns-dreamy-reception-with-604m-ap
 http://vitality.yahoo.com/video-second-act-jay-shafer-20910192
@@ -91,4 +91,10 @@ http://www.breitbart.com/article.php?id=CNG.0cc4a694b9a5e1dfeb575b3343e2bc74.c51
 http://www.breitbart.com/article.php?id=D9H1JP9G0&show_article=1
 http://www.cnbc.com/id/38253735
 http://www.foxnews.com/entertainment/2010/07/18/report-mel-gibson-planning-australia-ex-wife/?test=faces
+}}}
+
+==Show hot topics from twitter main page (twitter trends)==
+{{{
+ecasbas@cipher:~/proyectos/urldigger$ python urldigger.py -T
+['Felipe+Neto+preso', 'Nelson+Mandela', 'Jared+Leto', 'Alan+Carr', 'Premios+Juventud', 'yeahyousexybut', 'cuandoerani%C3%B1o', 'theyhatemebecause', 'Inception', 'Damned+United']
 }}}
