@@ -7,7 +7,7 @@ Some basic usage examples
 
 = Details =
 
-Show help and all options available. (This output will be different between versions)
+==Show help and all options available. (This output will be different between versions)==
 {{{
 ecasbas@cipher:~/proyectos/urldigger$ python urldigger.py -h
 Usage: urldigger.py [options] arg. -h to show HELP, version=urldigger.py-02b
@@ -59,4 +59,11 @@ Options:
 
   Output:
     -v, --verbose
+}}}
+
+
+==Show hot searches from google==
+{{{
+ecasbas@cipher:~/proyectos/urldigger$ python urldigger.py -G
+['mary kay letourneau', 'super 8', 'bethany benz', 'caviar from for the love of ray j', 'nevada unemployment', 'the temptations', 'frank lucas', 'national ice cream day', 'david ruffin', 'nascar schedule', 'billy joe tolliver', 'nyc triathlon', 'british open winners', 'slammin salmon', 'obama deception', 'louis oosthuizen', 'mark williams', 'hope floats', 'antwone fisher', 'top gear season 15 episode 4']
 }}}
