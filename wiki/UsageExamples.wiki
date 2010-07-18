@@ -103,7 +103,7 @@ ecasbas@cipher:~/proyectos/urldigger$ python urldigger.py -T
 For example if you have a file named keys.txt with plenty of terms like [http://pandalabs.pandasecurity.com/wp-content/uploads/2010/07/key.txt this]
 You could look for common SPAM words or suspicious code on the results urls from these terms with:
 {{{
-ecasbas@cipher:~/proyectos/urldigger-2/urldigger-03$ python urldigger.py -f keys.txt
+ecasbas@cipher:~/proyectos/urldigger$ python urldigger.py -f keys.txt
 Term: 'true blood season 3 episode 4 megavideo
 '
 Looking for SPAM in........http://worldvillage.com/truebloodseason3episode4megavideo
