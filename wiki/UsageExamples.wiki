@@ -67,3 +67,28 @@ Options:
 ecasbas@cipher:~/proyectos/urldigger$ python urldigger.py -G
 ['mary kay letourneau', 'super 8', 'bethany benz', 'caviar from for the love of ray j', 'nevada unemployment', 'the temptations', 'frank lucas', 'national ice cream day', 'david ruffin', 'nascar schedule', 'billy joe tolliver', 'nyc triathlon', 'british open winners', 'slammin salmon', 'obama deception', 'louis oosthuizen', 'mark williams', 'hope floats', 'antwone fisher', 'top gear season 15 episode 4']
 }}}
+
+==Get hot urls from alexa==
+{{{
+ecasbas@cipher:~/proyectos/urldigger-2/urldigger-03$ python urldigger.py -H
+http://news.yahoo.com/s/yblog_upshot/20100718/el_yblog_upshot/tea-party-group-expels-leader-for-clearly-offensive-blog-post
+http://movies.yahoo.com/news/movies.ap.org/inception-earns-dreamy-reception-with-604m-ap
+http://vitality.yahoo.com/video-second-act-jay-shafer-20910192
+http://travel.yahoo.com/p-interests-35009923
+http://lifestyle.msn.com/relationships/article.aspx?cp-documentid=24682705&GT1=32023
+http://www.cnn.com/2010/POLITICS/07/18/tea.party.imbroglio/index.html?hpt=T1
+http://mlb.mlb.com/video/play.jsp?content_id=10015643
+http://www.huffingtonpost.com/2010/07/18/crista-flanagan-in-playbo_n_650338.html
+http://www.amish-shah.com/life/how-to-be-a-gangster
+http://sports.espn.go.com/nba/news/story?id=5390603
+http://www.dailymail.co.uk/tvshowbiz/article-1295658/Mel-Gibson-leaves-States-selling-mansion-cut-price.html
+http://sports.espn.go.com/nba/news/story?id=5390711
+http://www.nydailynews.com/news/politics/2010/07/18/2010-07-18_tea_party_express_leader_mark_williams_expelled_over_colored_people_letter.html
+http://contact.ebay.com/ws/eBayISAPI.dll
+http://www.imdb.com/title/tt1375666/
+http://www.bing.com/search?q=girl+dies+park+ride&form=msnhpm
+http://www.breitbart.com/article.php?id=CNG.0cc4a694b9a5e1dfeb575b3343e2bc74.c51&show_article=1
+http://www.breitbart.com/article.php?id=D9H1JP9G0&show_article=1
+http://www.cnbc.com/id/38253735
+http://www.foxnews.com/entertainment/2010/07/18/report-mel-gibson-planning-australia-ex-wife/?test=faces
+}}}
