@@ -406,6 +406,10 @@ def main():
     options = optparse.OptionGroup(parser, "Options")
     options.add_option("-a", "--alexa", dest="country", 
 				   	  help="get urls from alexa top sites with selected country (EN, ES) [default 20].")
+    options.add_option("-f", "--file", dest="file", 
+				   	  help="search in urls results from terms in file.")
+    options.add_option("-F", "--fileurl", dest="fileurl", 
+				   	  help="show urls from search terms of the file.")
     options.add_option("-g", "--goog", dest="term",
                       help="get urls with search term=term from google [default 50].")
     options.add_option("-p", "--phishing", dest="phishing",
@@ -452,6 +456,21 @@ def main():
 			alexa("EN", options.number)
 		else: alexa("EN", 1)
 	else: print 'country option: \'%s\' not valid' %options.country
+
+    if options.file:
+		#check for file
+        f = open(options.file)
+        for line in f:
+			print "Term: '%s'" %line
+			googledefault(line, True)
+			#add to DB
+        f.close()
+
+    if options.fileurl:
+        f = open(options.fileurl)
+        for line in f:
+			googledefault(line, False)
+        f.close()
 
     if options.hot:
 	lookspam = False
