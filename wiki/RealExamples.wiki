@@ -3,6 +3,7 @@
 This site will be updated with the tests of urldigger util.
 
 {{{
+Suspicious SPAM!!!-----> http://lizartza.blogs.mondragon.edu/2008/10/30/science-business/ ( ['viagra'] )
 Suspicious SPAM!!!-----> http://www.nohanet.org/ ( ['viagra'] )
 Suspicious SPAM!!!-----> http://hubpages.com/hub/Watch-True-blood-season-3-episode-4-online-free-Megavideo-now ( ['iframe width="1" height="1"'] )
 Suspicious SPAM!!!-----> http://shine.yahoo.com/channel/none/true-blood-season-3-episode-4-megavideo-video-2007580/ ( ['tramadol'] )
