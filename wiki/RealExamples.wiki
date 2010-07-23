@@ -3,6 +3,7 @@
 This site will be updated with the tests of urldigger util.
 
 {{{
+Suspicious SPAM!!!-----> http://bebes-reborn.com/noticias.html ( ['buy cheap'] )
 Suspicious SPAM!!!-----> http://www.aepiot.com ( ['buy cheap'] )
 Suspicious SPAM!!!-----> http://lizartza.blogs.mondragon.edu/2008/10/30/science-business/ ( ['viagra'] )
 Suspicious SPAM!!!-----> http://www.nohanet.org/ ( ['viagra'] )
