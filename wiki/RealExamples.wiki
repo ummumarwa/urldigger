@@ -3,6 +3,7 @@
 This site will be updated with the tests of urldigger util.
 
 {{{
+Suspicious PHISHING!!!-----> http://www.bbvanetoffice.servicio.rmks.org/local_bdno/bbx/index.html ( www.bbva.es )
 Suspicious SPAM!!!-----> http://www.tomas-alonso.com/ ( ['viagra'] )
 Suspicious SPAM!!!-----> http://bebes-reborn.com/noticias.html ( ['buy cheap'] )
 Suspicious SPAM!!!-----> http://www.aepiot.com ( ['buy cheap'] )
