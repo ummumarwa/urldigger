@@ -3,7 +3,10 @@
 This site will be updated with the tests of urldigger util.
 
 {{{
-Suspicious PHISHING!!!-----> http://www.bbvanetoffice.servicio.rmks.org/local_bdno/bbx/index.html ( www.bbva.es )
+Suspicious PHISHING!!!-----> 
+Suspicious SPAM!!!-----> http://www.wikio.com/sports/baseball/baseball_players/adam_dunn ( ['without prescription'] )
+Suspicious SPAM!!!-----> http://www.misschatter.com/janf/index.php/2010/07/08/an-all-star-adam-dunn/ ( ['viagra'] )
+http://www.bbvanetoffice.servicio.rmks.org/local_bdno/bbx/index.html ( www.bbva.es )
 Suspicious SPAM!!!-----> http://www.tomas-alonso.com/ ( ['viagra'] )
 Suspicious SPAM!!!-----> http://bebes-reborn.com/noticias.html ( ['buy cheap'] )
 Suspicious SPAM!!!-----> http://www.aepiot.com ( ['buy cheap'] )
