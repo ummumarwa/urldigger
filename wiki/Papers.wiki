@@ -19,7 +19,7 @@
 
 [http://pi1.informatik.uni-mannheim.de/filepool/publications/monkey-spider.pdf Monkey-Spider: Detecting Malicious Websites with Low-Interaction Honeyclients]
 
-Searching for Malware: A Review of Attackers’ Use of Search Engines to Lure Victims [PDF from defcon 2010]
+Searching for Malware: A Review of Attackers’ Use of Search Engines to Lure Victims (PDF from defcon 2010)
 ----
 *Related projects to investigate:*
 
