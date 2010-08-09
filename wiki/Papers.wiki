@@ -23,6 +23,8 @@ Searching for Malware: A Review of Attackers’ Use of Search Engines to Lure Vi
 
 [http://www.mediapost.com/publications/?fa=Articles.showArticle&art_aid=133004 Anatomy Of An Attempted Malware Scam]
 
+[https://wiki.mozilla.org/Security/CSP/Deploying Security/CSP/Firefox]
+
 ----
 *Related projects to investigate:*
 
