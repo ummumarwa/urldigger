@@ -302,7 +302,7 @@ def spam_detect(url):
 	      		'cheap vista for students', 'Generic Pill', 'Secret to increase', 'cheap price'
 	      		'mexican pharmacy phentermine', 'Invia Nasal Viagra', 'buy generic', 'no prescription'
 				'buy discount', 'order cheap', 'buy cheap', 'without prescription', 
-	      		'iframe width="1" height="1"' 
+	      		'iframe width="1" height="1"', 'language="javascript">var $' 
                 ]
 
 	spam_url_suspicious = []
