@@ -42,3 +42,5 @@ Searching for Malware: A Review of Attackers’ Use of Search Engines to Lure Vi
 [http://xael.org/norman/python/pyclamav/index.html add virus detection capabilities to your python software]
 
 [http://twill.idyll.org/ a simple scripting language for Web browsing]
+
+[http://dirk-loss.de/python-tools.htm Más librerías python]
