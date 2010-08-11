@@ -33,3 +33,8 @@ Searching for Malware: A Review of Attackers’ Use of Search Engines to Lure Vi
 [http://code.google.com/p/jsunpack-n/ Emulate browser functionality when visiting a URL]
 
 [http://www.stopbadware.org/home/security stop badware]
+
+*Not very related but interesting to investigate:*
+[http://corelabs.coresecurity.com/index.php?module=Wiki&action=view&type=tool&name=Exomind deliver targetted phising attacks through social networks]
+
+[http://xael.org/norman/python/pyclamav/index.html add virus detection capabilities to your python software]
