@@ -33,7 +33,7 @@ Suspicious SPAM!!!-----> http://nelliebly.commoncircle.net/2010/06/06/adobe-and-
 Suspicious SPAM!!!-----> http://www.cut.org.br/
 }}}
 
-*All sites listed here were warned about this issue. If after some weeks the site follow with spam and malicious code, will be reported to [http://badwarebusters.org/community/submit StopBadware]*
+*All sites listed here were warned about this issue. If after some weeks the site follow with spam and malicious code, it will be reported to [http://badwarebusters.org/community/submit StopBadware]*
 
 _If you are using urldigger and found some sites harmed with SPAM or spurious code, please give me a shot._
 
