@@ -1,0 +1,18 @@
+Urldigger - Tool to extract URL addresses from different HOT sources and/or detect SPAM and malicious code in them.
+By Emilio Casbas
+Version : 1b, 13/08/2010 [currently working]
+-------------------------------------------
+Homepage: http://code.google.com/p/urldigger/
+
+FAQ: http://code.google.com/p/urldigger/wiki/FAQ
+
+
+
+EXTERNAL DEPENDENCIES
+--------------------
+
+-xgoogle library (http://www.catonmat.net/blog/python-library-for-google-search/)
+	* included from repository
+-pyparsing (http://pyparsing.wikispaces.com/)
+	* download it from the webpage and install it!
+

@@ -1,0 +1,7 @@
+1.0b   [13/08/2010] - Currently working in a new urldigger version. Coming soon...
+
+0.2b   [07/06/2010] - Several options organized. Added options to look at SPAM and PHISHING in the results. Minor improvements.
+0.2    [19/05/2010] - Fix in xgoogle library due to changes in Google Interface
+                      Malware list function disabled due to web scrapping restriction in the site
+
+0.1    [1/02/2010] -  urldigger initial release.
