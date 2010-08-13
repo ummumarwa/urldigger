@@ -44,7 +44,7 @@ from time import sleep, ctime
 #Thanks to Peteris Krumins for give permission and authored this great library
 from xgoogle.search import GoogleSearch, SearchError
 
-version = "03c"
+version = "1b"
 
 def main():
 	usage = "Usage: %prog [options] -h to show HELP" 
@@ -64,7 +64,7 @@ def main():
 	(options, args) = parser.parse_args()
 	if len(args) == 1 or len(args) == 0:
 		print "URLDIGGER (extract urls from hot sources and websites)"
-		print "by ecasbas (ecasbas at gmail.com)"
+		print "by Emilio Casbas (ecasbas at gmail.com)"
 		print ""
 
 	# Option choosed
