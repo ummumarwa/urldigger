@@ -1,7 +1,0 @@
-BEGIN TRANSACTION;
-CREATE TABLE urls(ukey INTEGER PRIMARY KEY,
-url TEXT,
-user, TEXT,
-result INTEGER,
-timescan TEXT);
-COMMIT;
