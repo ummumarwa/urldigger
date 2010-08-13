@@ -1,0 +1,12 @@
+SOME CRAZY IDEAS TO IMPROVE URLDIGGER
+(do you have some ideas to contribute in this project?, please, contact with me)
+
+---------------------------------------------------------------------------------------------
+* Integration with Google Safe Browsing API (http://code.google.com/apis/safebrowsing/)
+
+* List of signatures of potential malicious javascripts in form of regular expressions or similar.
+  Currently I am collecting a list of real attacks to extract the information.
+  http://code.google.com/p/urldigger/wiki/RealExamples
+  This feature will be a good way for people contributing with new signatures
+
+
