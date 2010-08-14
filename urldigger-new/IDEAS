@@ -9,4 +9,7 @@ SOME CRAZY IDEAS TO IMPROVE URLDIGGER
   http://code.google.com/p/urldigger/wiki/RealExamples
   This feature will be a good way for people contributing with new signatures
 
+* Collect al js files and review them separately. Several times the malicious code is inside
+  the js files. Example:
+  http://neapolitanworld.com/modules/mod_yoo_toppanel/mod_yoo_toppanel.js
 
