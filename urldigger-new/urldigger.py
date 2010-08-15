@@ -34,10 +34,12 @@
 #
 # Feedback and improvements are welcome! :-)
 
-
-import optparse
+#deprecated now using argparse
+#import optparse
+import argparse
 import os
 #import re
+import sys
 import threading
 from urldiggerlib import *
 from time import sleep, ctime
@@ -47,37 +49,41 @@ from xgoogle.search import GoogleSearch, SearchError
 version = "1b"
 
 def main():
-	usage = "Usage: %prog [options] -h to show HELP" 
-	parser = optparse.OptionParser(usage)
+	parser = argparse.ArgumentParser(description='urldigger tool to extract HOT topics and urls associated.')
 
-	# Commands
-	commands = optparse.OptionGroup(parser, "Commands")
-	commands.add_option("-a", "--alexa", action="store_true", #dest="alexa", #default="Defecto", action="store_true",
-		help="show hot urls from alexa")
-	commands.add_option("-g", "--goog", action="store_true",
-		help="show google trends")
-	commands.add_option("-t", "--twitrends", action="store_true",
-		help="show twitter trends")
+	parser.add_argument('-v', '--version', action='version', version='%(prog)s 1b')
+	parser.add_argument('-a', '--alexa', action='store_true', help='show alexa hot words')
+	parser.add_argument('-g', '--goog', action='store_true', help='show google trends')
+	parser.add_argument('-G', '--googtrendsurls', action='store_true', help='show google trends urls')
+	parser.add_argument('-s', '--googsearch', action='store', dest='googsearch', help='show urls from a google search')
+	parser.add_argument('-t', '--twitrends', action='store_true', help='show twitter trends')
 
-	parser.add_option_group(commands)
+	args = parser.parse_args()
 
-	(options, args) = parser.parse_args()
-	if len(args) == 1 or len(args) == 0:
+	if len(sys.argv) == 1 or len(sys.argv) == 0:
 		print "URLDIGGER (extract urls from hot sources and websites)"
 		print "by Emilio Casbas (ecasbas at gmail.com)"
 		print ""
 
 	# Option choosed
 	#----------------------------------------------------------------------------------------------
-	if options.alexa:
+	if args.alexa:
 		a_alexa = alexa()
 		print a_alexa
 
-	if options.goog:
+	if args.goog:
 		g_trends = google_trends()
 		print g_trends
 
-	if options.twitrends:
+	if args.googtrendsurls:
+		g_trends = google_trends()
+		for i in g_trends:
+			google(i, 20)
+
+	if args.googsearch:
+		google(args.googsearch, 20)
+
+	if args.twitrends:
 		t_trends = twitter_trends()
 		print t_trends
 	
