@@ -15,4 +15,6 @@ EXTERNAL DEPENDENCIES
 	* included from repository
 -pyparsing (http://pyparsing.wikispaces.com/)
 	* download it from the webpage and install it!
+-argparse (http://code.google.com/p/argparse/)
+	* download it from the webpage and install it!
 
