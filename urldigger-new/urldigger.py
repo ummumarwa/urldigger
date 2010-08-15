@@ -38,8 +38,6 @@
 #import optparse
 import argparse
 import os
-#import re
-import sys
 import threading
 from urldiggerlib import *
 from time import sleep, ctime
@@ -57,13 +55,13 @@ def main():
 	parser.add_argument('-G', '--googtrendsurls', action='store_true', help='show google trends urls')
 	parser.add_argument('-s', '--googsearch', action='store', dest='googsearch', help='show urls from a google search')
 	parser.add_argument('-t', '--twitrends', action='store_true', help='show twitter trends')
+	parser.add_argument('-T', '--twitrendsurls', action='store_true', help='show twitter trends urls')
 
 	args = parser.parse_args()
 
-	if len(sys.argv) == 1 or len(sys.argv) == 0:
-		print "URLDIGGER (extract urls from hot sources and websites)"
-		print "by Emilio Casbas (ecasbas at gmail.com)"
-		print ""
+	print "URLDIGGER (extract urls from hot sources and websites)"
+	print "by Emilio Casbas (ecasbas at gmail.com)"
+	print ""
 
 	# Option choosed
 	#----------------------------------------------------------------------------------------------
@@ -86,6 +84,11 @@ def main():
 	if args.twitrends:
 		t_trends = twitter_trends()
 		print t_trends
+
+	if args.twitrendsurls:
+		t_trends = twitter_trends()
+		for i in t_trends:
+			google(i, 20)
 	
 
 ############### MAIN PROGRAM ###########################
