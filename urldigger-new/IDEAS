@@ -13,3 +13,6 @@ SOME CRAZY IDEAS TO IMPROVE URLDIGGER
   the js files. Example:
   http://neapolitanworld.com/modules/mod_yoo_toppanel/mod_yoo_toppanel.js
 
+* Collect al exe files, calculate el MD5 and compare with some public source of malicious binarys.
+  Example URL hosting a trojan bank: http://somesite.com/xmlrpc/data/BANK.exe 
+
