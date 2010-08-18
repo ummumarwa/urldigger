@@ -51,6 +51,7 @@ def main():
 
 	parser.add_argument('-v', '--version', action='version', version='%(prog)s 1b')
 	parser.add_argument('-a', '--alexa', action='store_true', help='show alexa hot words')
+	parser.add_argument('-c', '--crawl', action='store', dest ='crawl', help='crawl the url with level = 1')
 	parser.add_argument('-g', '--goog', action='store_true', help='show google trends')
 	parser.add_argument('-G', '--googtrendsurls', action='store_true', help='show google trends urls')
 	parser.add_argument('-s', '--googsearch', action='store', dest='googsearch', help='show urls from a google search')
@@ -68,6 +69,10 @@ def main():
 	if args.alexa:
 		a_alexa = alexa()
 		print a_alexa
+
+	if args.crawl:
+		url = args.crawl
+		parseUrl(url)
 
 	if args.goog:
 		g_trends = google_trends()
