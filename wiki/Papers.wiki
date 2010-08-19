@@ -25,6 +25,8 @@ Searching for Malware: A Review of Attackers’ Use of Search Engines to Lure Vi
 
 [https://wiki.mozilla.org/Security/CSP/Deploying Security/CSP/Firefox]
 
+[http://portal.acm.org/citation.cfm?id=1651317&dl=GUIDE&coll=GUIDE&CFID=101132394&CFTOKEN=81029615#abstract A targeted web crawling for building malicious javascript collection]
+
 ----
 *Related projects to investigate:*
 
