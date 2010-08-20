@@ -14,6 +14,20 @@ class Url:
 		self.basepath = basepath
 
 
+class Contents:
+	"""
+		Class to encapsulate the different kind of potential URLs
+		in the crawling process of a URL
+	"""
+
+	def __init__(self, base, redirect, frames, links):
+
+		self.base 		= base
+		self.redirect 	= redirect
+		self.frames 	= frames
+		self.links 		= links
+
+
 def isJavaScript(url):
 	
 	p = re.compile('.*javascript:.*')
@@ -74,11 +88,52 @@ def getLinks(soup):
 		print "Links: %s\n" %url
 
 
+def getBaseHref(soup):
+
+	bases = soup.findAll('base')
+	
+	for base in bases:
+		if base:
+			if base.has_key('href'):
+				return base['href']
+
+
+def getRedirect(soup):
+
+	"""
+	Implementar
+	"""	
+	
+	a = "GetRedirect"
+	return(a)
+
+
+def getFrames(soup):
+
+	links = set()
+
+	frames = soup.findAll('frame')
+	for frame in frames:
+		if frame:
+			if frame.has_key('src'):
+				links.add(frame['src'])
+
+	return links
+
+
 def parseHtml(html):
+
+	if html == None:
+		return Contents(None, None, None, None)
 
 	soup = BeautifulSoup(html)
 
 	links = getLinks(soup)
+	base  = getBaseHref(soup)
+	redirect = getRedirect(soup)
+	frames = getFrames(soup)
+
+	return Contents(base, redirect, frames, links)
 
 #By default only level 1
 def parseUrl(url):
@@ -95,7 +150,15 @@ def parseUrl(url):
 		if page:
 			html = readUrl(page)
 			contents = parseHtml(html)
-			print contents
+			#print contents
+
+			if contents.base:
+				print "Contents BASE: %s" %contents.base
+
+			if contents.redirect:
+				print "Contents REDIRECT: %s" %contents.redirect
+
+			
 
 	except Exception, e:
 		print "'%s' in url: '%s'"  %(e, url)
