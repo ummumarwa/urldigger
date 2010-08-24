@@ -33,6 +33,28 @@ Suspicious SPAM!!!-----> http://nelliebly.commoncircle.net/2010/06/06/adobe-and-
 Suspicious SPAM!!!-----> http://www.cut.org.br/
 }}}
 
+----
+*Special case for the option*
+{{{
+python urldigger.py -S "inurl:'page.php?page=' 'hot video'"
+
+
+Suspicious SPAM!!!-----> http://uhl.o2group.net/catalog/images/page.php?page=redspottv&check=acc5d22fd7a658010975f29c83808a8a ( ['eval(function(p,a,c,k,e,r)'] )
+Looking for SPAM in ......http://sos-bg.com/images/page.php?page=redspottv&check=acc5d22fd7a658010975f29c83808a8a
+Suspicious SPAM!!!-----> http://sos-bg.com/images/page.php?page=redspottv&check=acc5d22fd7a658010975f29c83808a8a ( ['eval(function(p,a,c,k,e,r)'] )
+Looking for SPAM in ......http://www.myglasssmith.com/images/page.php?page=piccolo&check=b7e89bf6c1b3ba1e6fb3edda7c13e1b1
+Suspicious SPAM!!!-----> http://www.myglasssmith.com/images/page.php?page=piccolo&check=b7e89bf6c1b3ba1e6fb3edda7c13e1b1 ( ['eval(function(p,a,c,k,e,r)'] )
+Looking for SPAM in ......http://www.seguriexpress.com/tienda/images/page.php?page=holanda+dinamarca+en+vivo&check=50037921eb8cd71392e9a29143a817b6
+Suspicious SPAM!!!-----> http://www.seguriexpress.com/tienda/images/page.php?page=holanda+dinamarca+en+vivo&check=50037921eb8cd71392e9a29143a817b6 ( ['eval(function(p,a,c,k,e,r)'] )
+Looking for SPAM in ......http://www.twih.com/images/page.php?page=redspottv&check=acc5d22fd7a658010975f29c83808a8a
+Suspicious SPAM!!!-----> http://www.twih.com/images/page.php?page=redspottv&check=acc5d22fd7a658010975f29c83808a8a ( ['eval(function(p,a,c,k,e,r)'] )
+Looking for SPAM in ......http://www.digitalangeldvd.com/catalog/images/page.php?page=modern+muscle+x&check=e8122da95709b9690f69b89c450b8d52
+Suspicious SPAM!!!-----> http://www.digitalangeldvd.com/catalog/images/page.php?page=modern+muscle+x&check=e8122da95709b9690f69b89c450b8d52 ( ['eval(function(p,a,c,k,e,r)'] )
+Looking for SPAM in ......http://www.tecnowebsite.com/osc/images/page.php?page=georgia+department+of+revenue&check=e133c49309d026ec82e33b267ca408bc
+Suspicious SPAM!!!-----> http://www.tecnowebsite.com/osc/images/page.php?page=georgia+department+of+revenue&check=e133c49309d026ec82e33b267ca408bc ( ['eval(function(p,a,c,k,e,r)'] )
+}}}
+----
+
 *All sites listed here were warned about this issue. If after some weeks the site follow with spam and malicious code, it will be reported to [http://badwarebusters.org/community/submit StopBadware]*
 
 _If you are using urldigger and found some sites harmed with SPAM or spurious code, please give me a shot._
