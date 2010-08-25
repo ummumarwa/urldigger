@@ -27,6 +27,8 @@ Searching for Malware: A Review of Attackers’ Use of Search Engines to Lure Vi
 
 [http://portal.acm.org/citation.cfm?id=1651317&dl=GUIDE&coll=GUIDE&CFID=101132394&CFTOKEN=81029615#abstract A targeted web crawling for building malicious javascript collection]
 
+[http://www.cs.ucsb.edu/~chris/research/doc/acsac09_flash.pdf Analyzing and detecting Malicious Flash Advertisements]
+
 ----
 *Related projects to investigate:*
 
