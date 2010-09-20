@@ -3,6 +3,7 @@
 This site will be updated with the tests of urldigger util.
 
 {{{
+Suspicious PHISHING!!!-----> http://www.koreasca.or.kr/inc/oi.cajamadrid.es/cajamadrid/oi/pt_oi/login/ ( www.cajamadrid.es )
 Suspicious SPAM!!!-----> http://lisakellyphotography.com/blog/ ( ['language="javascript">var $'] )
 Suspicious SPAM!!!-----> http://www.wikio.com/sports/baseball/baseball_players/adam_dunn ( ['without prescription'] )
 Suspicious SPAM!!!-----> http://www.misschatter.com/janf/index.php/2010/07/08/an-all-star-adam-dunn/ ( ['viagra'] )
