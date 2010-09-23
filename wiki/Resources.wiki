@@ -1,0 +1,5 @@
+#summary One-sentence summary of this page.
+
+= Resources to clean malicious code from your site and avoid future infections =
+
+[http://forums.oscommerce.com/topic/313323-how-to-secure-your-site/ How to secure OScommerce]
