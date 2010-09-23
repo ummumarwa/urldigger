@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#Resources and doc to clean malicious code from websites and protect them.
 
 = Resources to clean malicious code from your site and avoid future infections =
 
