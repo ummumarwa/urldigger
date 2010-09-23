@@ -1,5 +1,10 @@
+
 #Resources and doc to clean malicious code from websites and protect them.
 
 = Resources to clean malicious code from your site and avoid future infections =
 
 [http://forums.oscommerce.com/topic/313323-how-to-secure-your-site/ How to secure OScommerce]
+
+[http://www.stopbadware.org/home/security Identify badware behaviour and securing website]
+
+[http://25yearsofprogramming.com/blog/20070705.htm How to prevent your site from getting hacked and how to repair]
