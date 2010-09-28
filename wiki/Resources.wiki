@@ -9,3 +9,7 @@
 [http://www.stopbadware.org/home/security Identify badware behaviour and securing website]
 
 [http://25yearsofprogramming.com/blog/20070705.htm How to prevent your site from getting hacked and how to repair]
+
+
+SPANISH
+[http://www.google.com/support/webmasters/bin/answer.py?answer=163633&cbid=2dedoqqb8rxg&src=cb&lev=%20index#2 Soporte Google]
