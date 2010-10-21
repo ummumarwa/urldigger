@@ -49,6 +49,7 @@ import os
 import urllib2
 import re
 import optparse
+import sys
 import threading
 from itertools import groupby
 from operator import itemgetter
@@ -86,7 +87,6 @@ def google(termtosearch, action):
 			if not tmp:
 				break
 			results.extend(tmp)
-	
 
 			#TODO switch in this code block
 			if action == 'mal':
@@ -385,7 +385,7 @@ def malicious_google(url):
 	google(url, 'mal')
 
 #show urls resulting from crawling the URL
-def crawling(url):
+def crawling(url, type):
 	linkregex = re.compile('<\w\s*href=[\'|"](.*?)[\'"].*?>')
 
 	f = urllib2.urlopen(url)
@@ -395,24 +395,48 @@ def crawling(url):
 	links.sort()
 	unique_list = list(map(itemgetter(0), groupby(links)))
 
+	#TODO what a messy code!!! clean it
 	for link in xrange(len(unique_list)):
 		if unique_list[link].startswith('http://') or unique_list[link].startswith('https://'):
-			print unique_list[link]
+			if type == 'check':
+				checkAgainstGoogle(unique_list[link])
+			else:
+				print unique_list[link]
 		else:
-			linknew = url + '/' + unique_list[link]
-			print linknew
+			if unique_list[link].startswith('/'):
+				if type == 'check':
+					linknew = url + unique_list[link]
+					checkAgainstGoogle(linknew)
+				else:
+					linknew = url + unique_list[link]
+					print linknew
+			else:
+				if re.match("^[a-zA-Z0-9]+.*", unique_list[link]):
+					if type == 'check':
+						linknew = url + '/' + unique_list[link]
+						checkAgainstGoogle(linknew)
+					else:
+						linknew = url + '/' + unique_list[link]
+						print linknew
 
 	f.close()
 
 
+'''TODO: the correct way to implement this is with the API
+   http://code.google.com/apis/safebrowsing/
+   When I have free time I'll implement in this way and you're free to do it. :-)
+   This is only a quick and dirty way to test the service. Use with caution or you will
+   be banned in Google.
+'''
 def checkAgainstGoogle(url):
 	URL = "http://safebrowsing.clients.google.com/safebrowsing/diagnostic?client=Firefox&hl=es-ES&site=%s" %url
+	#URL = "http://www.google.com/safebrowsing/diagnostic?site=%s" %url
 	no_suspicious = "This site is not currently listed as suspicious"
 
 	try:
                 response = urllib2.urlopen(URL)
         except urllib2.HTTPError, e:
-                print "Error ", e.code, search
+                print "Error ", e.code
                 sys.exit()
 
         lines = response.readlines()
@@ -434,7 +458,7 @@ def checkAgainstGoogle(url):
 #############################################################################################
 	
 def main():
-    usage = "usage: %prog [options] arg. -h to show HELP, version=%prog-02b"
+    usage = "usage: %prog [options] arg. -h to show HELP, version=%prog-02c"
     parser = optparse.OptionParser(usage)
 	
 
@@ -478,6 +502,9 @@ def main():
           			  help="look if the site checked is a phished site.")
     options.add_option("-P", "--phishingsearch", dest="phishingsearch",
           			  help="look for phished sites in the result google search urls.")
+    options.add_option("-r", "--malcrawling", dest="malcrawling",
+          			  help="Crawl the url passed as argument and check each url resultant against google SAFEBROWSING service.\
+							PLEASE USE WITH CAUTION or you will be banned in Google.")
     options.add_option("-s", "--spam", dest="spam",
                       help="look for common SPAM words in the URL site.")
     options.add_option("-S", "--spamgoogle", dest="spamgoogle",
@@ -555,7 +582,6 @@ def main():
     if options.malsearchs:
 		malicious_google(options.malsearchs)
 	
-
     if options.phishing:
 		phishing_detect(options.phishing)
 
@@ -563,10 +589,13 @@ def main():
 		phishing_google(options.phishingsearch)
 
     if options.crawl:
-		crawling(options.crawl)
+		crawling(options.crawl, 'None')
 
     if options.mal:
 		checkAgainstGoogle(options.mal)
+
+    if options.malcrawling:
+		crawling(options.malcrawling, 'check')
 	
 	# Be careful with this option. Took about 7 min in my laptop.
     if options.brute:
