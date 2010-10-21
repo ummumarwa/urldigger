@@ -86,19 +86,26 @@ def google(termtosearch, action):
 			if not tmp:
 				break
 			results.extend(tmp)
+	
 
-			if action == 'spam':
+			#TODO switch in this code block
+			if action == 'mal':
 				for res in results:
-					print '\033[1;34mLooking for SPAM in ......%s\033[1;m' % (res.url.encode('utf8'))
-					spam_detect(res.url.encode('utf8'))
-			elif action == 'phis':
-				for res in results:
-					print '\033[1;34mLooking for PHISHING in ......%s\033[1;m' % (res.url.encode('utf8'))
-					phishing_detect(res.url.encode('utf8'))
-					
+					checkAgainstGoogle(res.url.encode('utf8'))
 			else:
-					for res in results:
-						print res.url.encode('utf8')
+
+					if action == 'spam':
+						for res in results:
+							print '\033[1;34mLooking for SPAM in ......%s\033[1;m' % (res.url.encode('utf8'))
+							spam_detect(res.url.encode('utf8'))
+					elif action == 'phis':
+						for res in results:
+							print '\033[1;34mLooking for PHISHING in ......%s\033[1;m' % (res.url.encode('utf8'))
+							phishing_detect(res.url.encode('utf8'))
+							
+					else:
+							for res in results:
+								print res.url.encode('utf8')
 
 	except SearchError, e:
 		print "Search failed: %s" % e
@@ -373,6 +380,9 @@ def spam_domain(url):
 def phishing_google(url):
 	google(url, 'phis')
 
+#New action "mal" stands for malicious
+def malicious_google(url):
+	google(url, 'mal')
 
 #show urls resulting from crawling the URL
 def crawling(url):
@@ -393,6 +403,31 @@ def crawling(url):
 			print linknew
 
 	f.close()
+
+
+def checkAgainstGoogle(url):
+	URL = "http://safebrowsing.clients.google.com/safebrowsing/diagnostic?client=Firefox&hl=es-ES&site=%s" %url
+	no_suspicious = "This site is not currently listed as suspicious"
+
+	try:
+                response = urllib2.urlopen(URL)
+        except urllib2.HTTPError, e:
+                print "Error ", e.code, search
+                sys.exit()
+
+        lines = response.readlines()
+
+        for line in lines:
+                print "Scanning... %s" %url
+                if line.find("What is the current") != -1:
+                        line = line[line.find("What is the current listing status for"):]
+                        line = line[line.find("<blockquote><p>")+15:]
+                        state = line[:line.find(".</p>")]
+                        #if state in (no_suspicious):
+                        if state == no_suspicious:
+                                print '\033[1;34m%s\033[1;m' %state
+                        else:
+                                print '\033[1;41m%s\033[1;m' %state
 
 
 
@@ -447,8 +482,12 @@ def main():
                       help="look for common SPAM words in the URL site.")
     options.add_option("-S", "--spamgoogle", dest="spamgoogle",
                       help="look for common SPAM words in the result google search urls")
+    options.add_option("-w", "--malsearchs", dest="malsearchs",
+                      help="check the result google urls against the google SAFEBROWSING service")
     options.add_option("-n", "--num", dest="number", type="int",
                       help="specify number urls to get with 'option -a' (20,40,60,.. 200). [default 20]")
+    options.add_option("-x", "--mal", dest="mal",
+                      help="check the url against the google SAFEBROWSING service")
     parser.add_option_group(options)
 
     # Output
@@ -464,9 +503,6 @@ def main():
 	print "by ecasbas (ecasbas at gmail.com)"
 	print
         parser.error("incorrect number of arguments")
-
-	if options.mycrawler:
-		print "ASDFASDF"
 
 
 	#TODO: implement to show function actions in the output
@@ -516,16 +552,22 @@ def main():
     if options.spamgoogle:
 		spam_domain(options.spamgoogle)
 
+    if options.malsearchs:
+		malicious_google(options.malsearchs)
+	
+
     if options.phishing:
 		phishing_detect(options.phishing)
 
     if options.phishingsearch:
 		phishing_google(options.phishingsearch)
 
-	# ranking
     if options.crawl:
 		crawling(options.crawl)
 
+    if options.mal:
+		checkAgainstGoogle(options.mal)
+	
 	# Be careful with this option. Took about 7 min in my laptop.
     if options.brute:
 	threads = []
