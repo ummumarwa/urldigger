@@ -50,6 +50,8 @@ import urllib2
 import re
 import optparse
 import threading
+from itertools import groupby
+from operator import itemgetter
 from time import sleep, ctime
 #Thanks to Peteris Krumins for give permission and authored this great library
 from xgoogle.search import GoogleSearch, SearchError
@@ -371,6 +373,29 @@ def spam_domain(url):
 def phishing_google(url):
 	google(url, 'phis')
 
+
+#show urls resulting from crawling the URL
+def crawling(url):
+	linkregex = re.compile('<\w\s*href=[\'|"](.*?)[\'"].*?>')
+
+	f = urllib2.urlopen(url)
+	msg = f.read()
+	links = linkregex.findall(msg)
+
+	links.sort()
+	unique_list = list(map(itemgetter(0), groupby(links)))
+
+	for link in xrange(len(unique_list)):
+		if unique_list[link].startswith('http://') or unique_list[link].startswith('https://'):
+			print unique_list[link]
+		else:
+			linknew = url + '/' + unique_list[link]
+			print linknew
+
+	f.close()
+
+
+
 #############################################################################################
 	
 def main():
@@ -406,6 +431,8 @@ def main():
     options = optparse.OptionGroup(parser, "Options")
     options.add_option("-a", "--alexa", dest="country", 
 				   	  help="get urls from alexa top sites with selected country (EN, ES) [default 20].")
+    options.add_option("-c", "--crawl", dest="crawl",
+                      help="show the urls resulting from crawling the url passed as argument (level 1).")
     options.add_option("-f", "--file", dest="file", 
 				   	  help="search in urls results from terms in file.")
     options.add_option("-F", "--fileurl", dest="fileurl", 
@@ -422,8 +449,6 @@ def main():
                       help="look for common SPAM words in the result google search urls")
     options.add_option("-n", "--num", dest="number", type="int",
                       help="specify number urls to get with 'option -a' (20,40,60,.. 200). [default 20]")
-    options.add_option("-r", "--rank", dest="url",
-                      help="show the alexa rank for these url.")
     parser.add_option_group(options)
 
     # Output
@@ -439,6 +464,10 @@ def main():
 	print "by ecasbas (ecasbas at gmail.com)"
 	print
         parser.error("incorrect number of arguments")
+
+	if options.mycrawler:
+		print "ASDFASDF"
+
 
 	#TODO: implement to show function actions in the output
     if options.verbose:
@@ -494,9 +523,8 @@ def main():
 		phishing_google(options.phishingsearch)
 
 	# ranking
-    if options.url:
-	url = options.url
-	get_alexa_rank(url)
+    if options.crawl:
+		crawling(options.crawl)
 
 	# Be careful with this option. Took about 7 min in my laptop.
     if options.brute:
