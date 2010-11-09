@@ -2,6 +2,9 @@
 
 = Papers and documentation related to urldigger objectives =
 
+[http://user.cs.tu-berlin.de/~rieck/docs/2010-cujo.pdf Ecient Detection and Prevention of
+Drive-by-Download Attacks]
+
 [http://www.cs.ucsb.edu/~chris/research/doc/www10_jsand.pdf Detection and Analysis of Drive-by-Download Attacks and Malicious JavaScript code] *(Great report)*
  
 
