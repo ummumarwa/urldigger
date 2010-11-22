@@ -34,6 +34,14 @@ Suspicious SPAM!!!-----> http://nelliebly.commoncircle.net/2010/06/06/adobe-and-
 Suspicious SPAM!!!-----> http://www.cut.org.br/
 }}}
 
+Phishing option detect
+(URLs hide in order to protect both websites)
+
+#python urldigger.py -p http://www.somewebsitehacked.com
+{{{
+Suspicious PHISHING!!!-----> http://www.somewebsitehacked.com ( https://some.banco.es/ 
+}}}
+
 ----
 *Special case for the option*
 {{{
