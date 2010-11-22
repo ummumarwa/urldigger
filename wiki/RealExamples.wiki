@@ -35,11 +35,19 @@ Suspicious SPAM!!!-----> http://www.cut.org.br/
 }}}
 
 Phishing option detect
+This option is useful in conjunction with a scanner web to process each url hosted
+on the website.
 (URLs hide in order to protect both websites)
+
 
 #python urldigger.py -p http://www.somewebsitehacked.com
 {{{
-Suspicious PHISHING!!!-----> http://www.somewebsitehacked.com ( https://some.banco.es/ 
+Suspicious PHISHING!!!-----> http://www.somewebsitehacked.com ( https://some.banco.es/ )
+
+#python urldigger.py -p  http://session-id18326.banco.com.systfile.com/local_bdno/netoffice/
+
+Suspicious PHISHING!!!-----> http://session-id18326.banco.com.systfile.com/local_bdno/netoffice/ ( www.banco.es )
+
 }}}
 
 ----
