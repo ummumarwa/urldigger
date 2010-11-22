@@ -337,11 +337,29 @@ def spam_detect(url):
 
 def phishing_detect(url):
 	#fill in with all phished sites detected in SPAM folder
-	phished_sites_strings = [ 'www.bbva.es', 'www.cajamar.es', 'www.bancopopular.es', 'www.bbva.es', 'www.bancopastor.es'
-							  'www.caixasabadell.es', 'www.cajacantabria.com', 'www.cajamadrid.es', 'www.bancasabadell.es'
-							  'www.bancaja.es', 'www.bancomercio.com', 'www.bde.es', 'www.bancogui.es', 'www.bancopastor.es'
-							  'www.bancopopular.es', 'www.banesto.es', 'www.bankinter.es', 'www.caixacat.es' 
-					        ]
+	exp_bank = {
+		'k1': re.compile(r'www.bbva.es+'),
+		'k2': re.compile(r'telematic.caixamanlleu.es/'),
+		'k3': re.compile(r'https://telematic.caixamanelleu.es/'),
+		'k4': re.compile(r'www.barclays.es+', re.IGNORECASE),
+		'k5': re.compile(r'www.sabadellatlantico.com+', re.IGNORECASE),
+		'k6': re.compile(r'oficina24hores.caixagirona.es+', re.IGNORECASE),
+		'k7': re.compile(r'www.cajamar.es+', re.IGNORECASE),
+		'k8': re.compile(r'www.bancopopular.es+', re.IGNORECASE),
+		'k9': re.compile(r'www.bbva.es+', re.IGNORECASE),
+		'k10': re.compile(r'www.cajamar.es+', re.IGNORECASE),
+		'k11': re.compile(r'www.bancopopular.es+', re.IGNORECASE),
+		'k12': re.compile(r'www.bancopastor.es+', re.IGNORECASE),
+		'k13': re.compile(r'www.caixasabadell.es+', re.IGNORECASE),
+		'k14': re.compile(r'www.cajacantabria.com+', re.IGNORECASE),
+		'k15': re.compile(r'www.cajamadrid.es+', re.IGNORECASE),
+		'k16': re.compile(r'www.bancsabadell.es+', re.IGNORECASE),
+		'k17': re.compile(r'www.banesto.es+', re.IGNORECASE),
+		'k18': re.compile(r'www.bankinter.es+', re.IGNORECASE),
+		'k18': re.compile(r'www.caixacat.es+', re.IGNORECASE)
+		#'k5': re.compile('(www.barclays.es)+', re.IGNORECASE)
+	}
+
 
 	phishing_url_suspicious = []
 	phishing_site_suspicious = []
@@ -353,11 +371,13 @@ def phishing_detect(url):
 
 	if 'lines' in locals():
 		for line in lines:
-			for p in phished_sites_strings:
-				if p in line and p not in url:
+			for key, pattern in exp_bank.items():
+				m = pattern.search(line)
+				if m and m.group() not in url:
 					if url not in phishing_url_suspicious:
 						phishing_url_suspicious.append(url)
-						phishing_site_suspicious.append(p)
+						phishing_site_suspicious.append(m.group())
+			
 
 	for u in phishing_url_suspicious:
             print '\033[1;41mSuspicious PHISHING!!!-----> %s ( %s )\033[1;m' %(u, phishing_site_suspicious[0])
@@ -493,7 +513,7 @@ def main():
     options.add_option("-c", "--crawl", dest="crawl",
                       help="show the urls resulting from crawling the url passed as argument (level 1).")
     options.add_option("-f", "--file", dest="file", 
-				   	  help="search in urls results from terms in file.")
+				   	  help="search for SPAM and PHISHING in urls from the file.")
     options.add_option("-F", "--fileurl", dest="fileurl", 
 				   	  help="show urls from search terms of the file.")
     options.add_option("-g", "--goog", dest="term",
@@ -553,8 +573,14 @@ def main():
 		#check for file
         f = open(options.file)
         for line in f:
+			print "Detecting SPAM and PHISHING in %s...." %line
+			spam_detect(line)
+			phishing_detect(line)
+
+			'''
 			print "Term: '%s'" %line
 			googledefault(line, True)
+			'''
 			#add to DB
         f.close()
 
