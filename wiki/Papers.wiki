@@ -32,6 +32,8 @@ Searching for Malware: A Review of Attackers’ Use of Search Engines to Lure Vi
 [http://www.cs.ucsb.edu/~chris/research/doc/acsac09_flash.pdf Analyzing and detecting Malicious Flash Advertisements]
 
 [http://www.m86security.com/webinars/05_10/Web_Exploits_Theres_an_App_for_That.pdf Web Exploits: There's an App for that]
+
+[http://www.cs.ucdavis.edu/~hchen/paper/www07.pdf Connecting web spammers with advertisers]
 ----
 *Related projects to investigate:*
 
