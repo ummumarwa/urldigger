@@ -633,7 +633,8 @@ def main():
 	threads.append(t)
 	t = threading.Thread(target=alexa, args=("EN", 200))
 	threads.append(t)
-	t = threading.Thread(target=alexaHOT, args=())
+	lookspam = False
+	t = threading.Thread(target=alexaHOT, args=(lookspam,))
 	threads.append(t)
 	t = threading.Thread(target=urls_google_trends, args=())
 	threads.append(t)
