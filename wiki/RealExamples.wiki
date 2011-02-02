@@ -242,3 +242,10 @@ Pattern: just before the close html tag a script tag will be suspicious
 <script src="http://nt07.in/3"></script></body>
 </html>
 }}}
+
+Phishing patter: httrack tags.
+{{{
+</body>
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
+</html>
+}}}
