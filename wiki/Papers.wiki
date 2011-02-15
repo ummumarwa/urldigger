@@ -6,7 +6,6 @@
 
 [http://www.cs.ucsb.edu/~chris/research/doc/www10_jsand.pdf Detection and Analysis of Drive-by-Download Attacks and Malicious JavaScript code] *(Great report)*
  
-
 [http://seclab.stanford.edu/websec/framebusting/ Clickjacking vulnerabilities in popular sites]
 
 [http://www.caro2010.org/popup_buescher.html Detecting malicious web pages with MonkeyWrench] (Paper available privately)
@@ -34,6 +33,8 @@ Searching for Malware: A Review of Attackers’ Use of Search Engines to Lure Vi
 [http://www.m86security.com/webinars/05_10/Web_Exploits_Theres_an_App_for_That.pdf Web Exploits: There's an App for that]
 
 [http://www.cs.ucdavis.edu/~hchen/paper/www07.pdf Connecting web spammers with advertisers]
+
+[http://wam.dasient.com/wam/resources/The_Widgetization_of_the_Web.pdf The Widgetization of the web]
 ----
 *Related projects to investigate:*
 
