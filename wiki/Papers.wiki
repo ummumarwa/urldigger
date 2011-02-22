@@ -35,6 +35,8 @@ Searching for Malware: A Review of Attackers’ Use of Search Engines to Lure Vi
 [http://www.cs.ucdavis.edu/~hchen/paper/www07.pdf Connecting web spammers with advertisers]
 
 [http://wam.dasient.com/wam/resources/The_Widgetization_of_the_Web.pdf The Widgetization of the web]
+
+[http://www.benedelman.org/typosquatting Measuring typosquatting]
 ----
 *Related projects to investigate:*
 
