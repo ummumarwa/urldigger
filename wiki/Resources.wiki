@@ -16,7 +16,9 @@ SPANISH
 
 [http://www.google.com/support/webmasters/bin/answer.py?answer=163633&cbid=2dedoqqb8rxg&src=cb&lev=%20index#2 Soporte Google]
 
+
 WEB SITES TO CHECK URLS
+
 [http://urlquery.net urlQUERY]
 
 [http://urlvoid.com urlVOID]
