@@ -249,3 +249,7 @@ Phishing patter: httrack tags.
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
 </html>
 }}}
+
+{{{
+ <img src="http://tendance.es/cron.php?s=d6665955dade512b06885c880fd6949c&amp;rand=515947" alt="" width="1" heigh     t="1" border="0" />
+}}}
