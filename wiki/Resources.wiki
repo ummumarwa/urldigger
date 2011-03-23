@@ -15,3 +15,16 @@
 SPANISH
 
 [http://www.google.com/support/webmasters/bin/answer.py?answer=163633&cbid=2dedoqqb8rxg&src=cb&lev=%20index#2 Soporte Google]
+
+WEB SITES TO CHECK URLS
+[http://urlquery.net urlQUERY]
+
+[http://urlvoid.com urlVOID]
+
+[http://www.unmaskparasites.com/ UnmaskParasites]
+
+[http://www.google.com/safebrowsing/diagnostic?site= Google Diagnostic]
+
+[http://wepawet.iseclab.org/ Wepawet]
+
+[http://www.emiliocasbas.com/showmalcode ShowSuspiciousCode]
