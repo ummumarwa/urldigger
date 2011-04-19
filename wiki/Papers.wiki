@@ -51,7 +51,7 @@ Searching for Malware: A Review of Attackers’ Use of Search Engines to Lure Vi
 ----
 *Not very related but interesting to investigate:*
 
-[HoneyBot, your man in the middle for automated social engineering http://www.usenix.org/event/leet10/tech/full_papers/Lauinger.pdf]
+[http://www.usenix.org/event/leet10/tech/full_papers/Lauinger.pdf HoneyBot your man in the middle for automated social engineering]
 
 [http://corelabs.coresecurity.com/index.php?module=Wiki&action=view&type=tool&name=Exomind deliver targetted phising attacks through social networks]
 
