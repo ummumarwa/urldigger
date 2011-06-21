@@ -12,6 +12,8 @@
 
 [http://mostpopularwebsites.net/ To harvest from top sites urls]
 
+[https://github.com/cweb/iri-tests/blob/master/tests.xml URL tests]
+
 SPANISH
 
 [http://www.google.com/support/webmasters/bin/answer.py?answer=163633&cbid=2dedoqqb8rxg&src=cb&lev=%20index#2 Soporte Google]
