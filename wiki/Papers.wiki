@@ -60,3 +60,7 @@ Searching for Malware: A Review of Attackers’ Use of Search Engines to Lure Vi
 [http://twill.idyll.org/ a simple scripting language for Web browsing]
 
 [http://dirk-loss.de/python-tools.htm Más librerías python]
+
+----
+*To read
+[http://www.technologyreview.com/computing/37718/ The perfect SCAM]
