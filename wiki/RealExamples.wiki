@@ -258,7 +258,7 @@ Phishing patter: httrack tags.
  <img src="http://tendance.es/cron.php?s=d6665955dade512b06885c880fd6949c&amp;rand=515947" alt="" width="1" heigh     t="1" border="0" />
 }}}
 
-iframe code or text previous to start first HTML5 tag.
+Iframes at the top of the page( iframe code or text previous to start first HTML5 tag.)
 {{{
 <iframe width="10" height="10" style="visibility:hidden;position:absolute;left:0;top:0;" src="http://click.clickfeeds.net/feed/frames.php?uid=56&frames=3"></iframe><!DOCTYPE html>
 }}}
